@@ -1,4 +1,4 @@
-import { About, Cases, Hero } from '@/components';
+import { About, Cases, Hero, Navbar } from '@/components';
 import Head from 'next/head';
 
 export default function Home() {
@@ -10,9 +10,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero />
-      <About />
-      <Cases />
+      <div className="grid grid-cols-12">
+        <div className="col-start-2 col-end-12">
+          <Navbar />
+          <Hero />
+          <About />
+          <Cases />
+        </div>
+      </div>
     </>
   );
 }
