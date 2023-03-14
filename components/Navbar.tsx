@@ -8,10 +8,10 @@ interface navTab {
 }
 
 const tab: navTab[] = [
-  { title: 'Home', href: '/' },
+  { title: 'Application', href: '/application' },
+  { title: 'Service', href: '/service' },
   { title: 'Pricing', href: '/pricing' },
   { title: 'About', href: '/about' },
-  { title: 'Preview', href: '/preview' },
   { title: 'Contacts', href: '/contacts' },
 ];
 
@@ -36,8 +36,8 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
-      <button className="px-5 py-3 bg-primary-dark/10 text-[#F2A341] font-bold rounded-md">
-        Purchase
+      <button className="px-5 py-3 bg-[#B66D00]/10 text-primary-1 font-semibold rounded-md">
+        Get Started
       </button>
     </div>
   );
