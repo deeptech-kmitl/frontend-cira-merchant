@@ -1,4 +1,80 @@
 import Link from 'next/link';
+import { BsFillTelephoneFill } from 'react-icons/bs';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLine,
+  FaLinkedinIn,
+  FaTwitter,
+} from 'react-icons/fa';
+import { MdEmail, MdLocationPin } from 'react-icons/md';
+
+interface footerCol {
+  header: string;
+  menu: menu[];
+}
+
+interface menu {
+  // eslint-disable-next-line no-undef
+  appearedAs: string | JSX.Element;
+  href: string;
+}
+
+const footerMenu: footerCol[] = [
+  {
+    header: 'Pages',
+    menu: [
+      { appearedAs: 'About', href: '/about' },
+      { appearedAs: 'Partner', href: '/partner' },
+      { appearedAs: 'Plans', href: '/plans' },
+    ],
+  },
+  {
+    header: 'Service',
+    menu: [
+      { appearedAs: 'Support', href: '/support' },
+      { appearedAs: 'Contact', href: '/contact' },
+      { appearedAs: 'Login', href: '/login' },
+    ],
+  },
+  {
+    header: 'Contact',
+    menu: [
+      {
+        appearedAs: (
+          <div className="flex space-x-3 items-center">
+            <BsFillTelephoneFill />
+            <p>(02) 123-4567</p>
+          </div>
+        ),
+        href: '',
+      },
+      {
+        appearedAs: (
+          <div className="flex space-x-3 items-center">
+            <MdEmail />
+            <p>cirarobotics@gmail.com</p>
+          </div>
+        ),
+        href: 'mailto:cirarobotics@gmail.com',
+      },
+      {
+        appearedAs: (
+          <div className="flex space-x-3 items-start">
+            <div className="w-4 mt-1">
+              <MdLocationPin />
+            </div>
+            <p>
+              Office CiRA Lab King Mongkut&apos;s Institute of Technology
+              Ladkrabang 1 Soi Chalongkrung 1Ladkrabang, Bangkok Thailand 10520
+            </p>
+          </div>
+        ),
+        href: '',
+      },
+    ],
+  },
+];
 
 const Footer = () => {
   return (
@@ -13,57 +89,35 @@ const Footer = () => {
           </p>
           <div className="flex space-x-4 pt-4">
             <Link href="" target="_blank">
-              fb
+              <FaFacebookF />
             </Link>
             <Link href="" target="_blank">
-              fb
+              <FaTwitter />
             </Link>
             <Link href="" target="_blank">
-              fb
+              <FaLinkedinIn />
             </Link>
             <Link href="" target="_blank">
-              fb
+              <FaInstagram />
+            </Link>
+            <Link href="" target="_blank">
+              <FaLine />
             </Link>
           </div>
         </div>
         <div className="flex w-full space-x-32">
-          <div className="flex flex-col space-y-8 text-[#FCFCFC]">
-            <h4 className="font-semibold text-xl">Pages</h4>
-            <div className="flex flex-col space-y-4">
-              <Link href="/">About</Link>
-              <Link href="/">Partner</Link>
-              <Link href="/">Plans</Link>
+          {footerMenu.map((item: footerCol, i: number) => (
+            <div className="flex flex-col space-y-8 text-[#FCFCFC]" key={i}>
+              <h4 className="font-semibold text-xl">{item.header}</h4>
+              <div className="flex flex-col space-y-4">
+                {item.menu.map((item: menu, id: number) => (
+                  <Link href={item.href} key={id} target="_blank">
+                    {item.appearedAs}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col space-y-8 text-[#FCFCFC]">
-            <h4 className="font-semibold text-xl">Service</h4>
-            <div className="flex flex-col space-y-4">
-              <Link href="/">Support</Link>
-              <Link href="/">Contact</Link>
-              <Link href="/">Login</Link>
-            </div>
-          </div>
-          <div className="flex flex-col space-y-8 text-[#FCFCFC]">
-            <h4 className="font-semibold text-xl">Contact</h4>
-            <div className="flex flex-col space-y-4">
-              <Link href="/" className="flex space-x-2">
-                <p>p</p>
-                <p>(02) 123-4567</p>
-              </Link>
-              <Link href="/" className="flex space-x-2">
-                <p>p</p>
-                <p>cirarobotics@gmail.com</p>
-              </Link>
-              <Link href="/" className="flex space-x-2">
-                <p>p</p>
-                <p>
-                  Office CiRA Lab King Mongkut&apos;s Institute of Technology
-                  Ladkrabang 1 Soi Chalongkrung 1 Ladkrabang, Bangkok Thailand
-                  10520
-                </p>
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div className="w-full flex justify-between px-20 py-6 space-x-72 text-[#fcfcfc]">
