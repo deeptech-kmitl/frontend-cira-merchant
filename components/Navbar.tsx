@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="w-full flex justify-between items-center py-8">
       <Link href="/" className="relative h-[65px] w-[90px]">
-        <Image src="/images/cira_logo.png" fill alt="" />
+        <Image src="/images/cira_logo.png" fill alt="" priority />
       </Link>
       <ul className="flex space-x-12">
         {tab.map((item: navTab) => (
