@@ -1,4 +1,4 @@
-import { About, Cases, Footer, Hero, Navbar } from '@/components';
+import { About, Cases, Footer, Hero, Navbar, Support } from '@/components';
 import Head from 'next/head';
 
 export default function Home() {
@@ -13,6 +13,7 @@ export default function Home() {
           <Hero />
           <About />
           <Cases />
+          <Support />
         </div>
       </div>
       <Footer />

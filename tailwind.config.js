@@ -21,6 +21,7 @@ module.exports = {
         'light-brown': '#A77327',
         dark: '#001533',
         white: '#F4F7FF',
+        subtitle: '#697B98',
         highlighter: '#FFE5AB',
         gray: '#8F9198',
       },

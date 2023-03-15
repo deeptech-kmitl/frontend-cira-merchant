@@ -7,7 +7,7 @@ import { PrimaryButton } from '..';
 
 const Hero = () => {
   return (
-    <div className="w-full h-min-screen">
+    <div className="w-full min-h-screen">
       <div className="flex justify-center py-40">
         <div className="w-3/5 flex flex-col justify-center items-center text-center space-y-14">
           <h1 className="text-6xl font-bold inline-block bg-gradient-to-r from-[#9A5F06] via-[#BE911F] via-[#FCB040] to-[#E4D395] bg-clip-text text-transparent leading-[72px]">
@@ -41,7 +41,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="h-screen h-min-screen py-28">
+      <div className="min-h-screen py-28">
         <div className="absolute left-3/4">
           <Image src="/svgs/skeleton.svg" width={200} height={200} alt="" />
         </div>
