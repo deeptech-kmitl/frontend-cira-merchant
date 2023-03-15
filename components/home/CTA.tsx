@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { BsArrowDown, BsCheck } from 'react-icons/bs';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { RiShareBoxLine } from 'react-icons/ri';
-import OutlinedButton from '../shared/OutlinedButton';
-import PrimaryButton from '../shared/PrimaryButton';
+import { OutlinedButton, PrimaryButton, PrimaryChip } from '..';
 
 interface license {
   usage: string;
@@ -36,7 +35,7 @@ const licenseList: license[] = [
 const CTA = () => {
   return (
     <div className="w-full min-h-screen py-20 flex flex-col items-center">
-      <div className="flex justify-between space-x-10">
+      <div className="w-full flex justify-between space-x-16">
         <div>
           <div className="absolute left-0">
             <svg
@@ -57,7 +56,7 @@ const CTA = () => {
           <Image src="/images/cta.png" width={870} height={610} alt="" />
         </div>
         <div className="flex flex-col space-y-8 w-2/5">
-          <h3 className="text-3xl text-dark-brown">
+          <h3 className="text-3xl text-dark-brown font-semibold">
             CiRA CORE is Free For{' '}
             <span className="text-primary-1 underline">Personal</span> or
             <span className="text-primary-1 underline"> Commercial Use</span>
@@ -102,9 +101,7 @@ const CTA = () => {
         </div>
       </div>
       <div className="w-2/5 py-60 flex flex-col justify-between items-center text-center space-y-8">
-        <button className="uppercase rounded-full py-2 px-8 font-semibold bg-highlighter text-primary-1">
-          free-trials
-        </button>
+        <PrimaryChip msg={'FREE-TRIALS'} />
         <h3 className="text-3xl text-dark-brown font-semibold">
           Get <span className="text-light-brown underline">CiRA CORE</span> Now
         </h3>
@@ -112,7 +109,7 @@ const CTA = () => {
           CiRA CORE is free for student, create Ai Tools for the future, share
           insights and get creative on the internet of things.
         </p>
-        <button className="flex items-center text-white space-x-4 bg-primary-1 rounded-md px-14 py-4 font-semibold shadow-lg shadow-primary-1/30 hover:animate-bounce transition-all ease-in-out">
+        <button className="flex items-center text-white space-x-4 bg-primary-1 rounded-md px-14 py-4 font-semibold shadow-lg shadow-primary-1/30">
           <BsArrowDown />
           <p>Get free trials</p>
         </button>
