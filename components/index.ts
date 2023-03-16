@@ -1,8 +1,11 @@
 export { default as Footer } from './Footer';
 export { default as About } from './home/About';
 export { default as Cases } from './home/Cases';
+export { default as CTA } from './home/CTA';
 export { default as Hero } from './home/Hero';
 export { default as Support } from './home/Support';
+export { default as GridLayout } from './layout/GridLayout';
 export { default as Navbar } from './Navbar';
 export { default as OutlinedButton } from './shared/OutlinedButton';
 export { default as PrimaryButton } from './shared/PrimaryButton';
+export { default as PrimaryChip } from './shared/PrimaryChip';
