@@ -23,7 +23,7 @@ const Navbar = () => {
       <Link href="/" className="relative h-[65px] w-[90px]">
         <Image src="/images/cira_logo.png" fill alt="" priority />
       </Link>
-      <ul className="flex space-x-12">
+      <ul className="hidden lg:flex space-x-12">
         {tab.map((item: navTab) => (
           <Link href={item.href} key={item.title}>
             <li

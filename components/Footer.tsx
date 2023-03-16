@@ -79,7 +79,7 @@ const footerMenu: footerCol[] = [
 const Footer = () => {
   return (
     <div className="w-full bg-gray divide-[#fcfcfc] divide-y">
-      <div className="w-full flex justify-between px-20 py-14 space-x-72">
+      <div className="w-full flex lg:flex-row flex-col justify-between px-20 py-14 lg:space-x-72 space-y-20 md:space-y-0">
         <div className="flex flex-col space-y-2  text-[#FCFCFC]">
           <h4 className="font-semibold text-xl">CIRA ROBOTICS CO., LTD</h4>
           <p className="w-4/5">
@@ -105,7 +105,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="flex w-full space-x-32">
+        <div className="flex flex-col space-y-10 w-full md:space-x-32 md:flex-row md:space-y-0 md:pt-8 lg:pt-0">
           {footerMenu.map((item: footerCol, i: number) => (
             <div className="flex flex-col space-y-8 text-[#FCFCFC]" key={i}>
               <h4 className="font-semibold text-xl">{item.header}</h4>

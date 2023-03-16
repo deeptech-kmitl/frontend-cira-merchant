@@ -34,8 +34,8 @@ const licenseList: license[] = [
 
 const CTA = () => {
   return (
-    <div className="w-full min-h-screen py-20 flex flex-col items-center">
-      <div className="w-full flex justify-between space-x-16">
+    <div className="w-full md:min-h-screen py-20 flex flex-col items-center">
+      <div className="hidden md:flex w-full justify-between lg:space-x-16 lg:space-y-0 md:space-y-[600px]">
         <div>
           <div className="absolute left-0">
             <svg
@@ -51,11 +51,11 @@ const CTA = () => {
               />
             </svg>
           </div>
+          <div className="absolute left-0">
+            <Image src="/images/cta.png" width={870} height={610} alt="" />
+          </div>
         </div>
-        <div className="absolute left-0">
-          <Image src="/images/cta.png" width={870} height={610} alt="" />
-        </div>
-        <div className="flex flex-col space-y-8 w-2/5">
+        <div className="flex flex-col text-center items-center lg:text-left lg:items-start space-y-8 lg:w-2/5">
           <h3 className="text-3xl text-dark-brown font-semibold">
             CiRA CORE is Free For{' '}
             <span className="text-primary-1 underline">Personal</span> or
@@ -100,7 +100,7 @@ const CTA = () => {
           </div>
         </div>
       </div>
-      <div className="w-2/5 py-60 flex flex-col justify-between items-center text-center space-y-8">
+      <div className="md:w-3/4 lg:w-2/5 py-20 md:py-60 flex flex-col justify-between items-center text-center space-y-8">
         <PrimaryChip msg={'FREE-TRIALS'} />
         <h3 className="text-3xl text-dark-brown font-semibold">
           Get <span className="text-light-brown underline">CiRA CORE</span> Now
