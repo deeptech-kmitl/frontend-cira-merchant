@@ -88,7 +88,7 @@ const Cases = () => {
               </div>
             </div>
             <div className="flex justify-center text-center text-white">
-              <p className="md:w-1/2">
+              <p className="md:w-1/2 leading-loose">
                 Like the demo above, you can use CIRA CORE with ease, just need
                 to drag the template design you want, design the schema, and
                 execute!
