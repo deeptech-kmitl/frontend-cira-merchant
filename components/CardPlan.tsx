@@ -54,8 +54,8 @@ const data: plan[] = [
 ];
 const CardPlan = () => {
   return (
-    <div className="h-4/6 grid grid-cols-6 justify-self-center	justify-items-center">
-      <div></div>
+    <div className="h-4/6 grid grid-cols-4 2xl:grid-cols-6 justify-self-center	justify-items-center">
+      <div className="hidden 2xl:block"></div>
       {data.map((item: plan, i: number) => (
         <div key={i} className={'flex items-center'}>
           {i == 2 ? (
@@ -121,7 +121,7 @@ const CardPlan = () => {
                     </div>
                   </div>
 
-                  <button className="w-full mb-6 bg-transparent bg-[#FCB040] hover:bg-[#FFFFFF] group text-white font-semibold hover:text-[#FCB040] py-2 px-4 border border-transparent hover:border-[#FCB040] rounded">
+                  <button className="w-full mb-6 bg-[#FCB040] hover:bg-[#FFFFFF] group text-white font-semibold hover:text-[#FCB040] py-2 px-4 border border-transparent hover:border-[#FCB040] rounded">
                     <div className="flex justify-between">
                       <p className="text-[16px]">Choose plan</p>
 
