@@ -113,7 +113,7 @@ const About = () => {
             of robotics.
           </p>
         </div>
-        <div className="h-20"/>
+        <div className="h-20" />
         <div className="grid grid-cols-3 gap-4 ">
           {benefits.map((item: benefit, i: number) => (
             <div className="group" key={i}>
@@ -133,7 +133,7 @@ const About = () => {
             </div>
           ))}
         </div>
-        <div className="h-52"/>
+        <div className="h-52" />
         <div className="grid grid-cols-2 gap-4">
           <div className="grid w-full">
             <p className="text-2xl text-[#73532C] font-medium">
@@ -163,9 +163,7 @@ const About = () => {
               {imageDeepDetects.image}
               {imageDeepDetects.image}
             </div>
-            <div className="grid items-center">
-              {imageDeepDetects.image}
-            </div>
+            <div className="grid items-center">{imageDeepDetects.image}</div>
           </div>
         </div>
       </div>
