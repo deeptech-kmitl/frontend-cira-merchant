@@ -2,7 +2,6 @@ import {
   About,
   Cases,
   CTA,
-  Footer,
   GridLayout,
   Hero,
   Navbar,
@@ -24,7 +23,7 @@ export default function Home() {
         <Support />
         <CTA />
       </GridLayout>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
