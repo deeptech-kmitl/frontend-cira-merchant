@@ -1,4 +1,13 @@
-import { About, Cases, Footer, Hero, Navbar, Support } from '@/components';
+import {
+  About,
+  Cases,
+  CTA,
+  Footer,
+  GridLayout,
+  Hero,
+  Navbar,
+  Support,
+} from '@/components';
 import Head from 'next/head';
 
 export default function Home() {
@@ -7,15 +16,14 @@ export default function Home() {
       <Head>
         <link rel="icon" href="/images/cira_logo.png" />
       </Head>
-      <div className="grid grid-cols-12">
-        <div className="col-start-2 col-end-12">
-          <Navbar />
-          <Hero />
-          <About />
-          <Cases />
-          <Support />
-        </div>
-      </div>
+      <GridLayout>
+        <Navbar />
+        <Hero />
+        <About />
+        <Cases />
+        <Support />
+        <CTA />
+      </GridLayout>
       <Footer />
     </>
   );
