@@ -1,4 +1,4 @@
-import { CardPlan, Footer, GridLayout, Navbar } from '@/components';
+import { CardPlan, GridLayout, Navbar } from '@/components';
 export default function pricing() {
   return (
     <>
@@ -11,7 +11,6 @@ export default function pricing() {
         </h1>
         <CardPlan />
       </div>
-      <Footer />
     </>
   );
 }

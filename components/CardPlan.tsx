@@ -54,14 +54,13 @@ const data: plan[] = [
 ];
 const CardPlan = () => {
   return (
-    <div className="h-4/6 grid grid-cols-4 2xl:grid-cols-6 justify-self-center	justify-items-center">
-      <div className="hidden 2xl:block"></div>
+    <div className="h-4/6 flex w-full justify-center space-x-6">
       {data.map((item: plan, i: number) => (
-        <div key={i} className={'flex items-center'}>
+        <div key={i} className="flex items-center">
           {i == 2 ? (
             <div
               key={i}
-              className="w-[273px] max-h-3/5 h-5/6 bg-[#FFFFFF] ml-6 pt-5 shadow-lg"
+              className="w-auto max-w-[273px] max-h-3/5 h-5/6 bg-[#FFFFFF] ml-6 pt-5 shadow-lg"
             >
               <div className="flex justify-between h-1/5">
                 <div className="w-[3px] bg-[#FFF2DE]" />
@@ -141,7 +140,7 @@ const CardPlan = () => {
           ) : (
             <div
               key={i}
-              className="w-[273px] h-3/4 bg-[#FFFFFF] ml-6 pt-5 shadow-lg"
+              className="w-auto max-w-[273px] h-3/4 bg-[#FFFFFF] ml-6 pt-5 shadow-lg"
             >
               <div className="flex justify-between h-1/5">
                 <div className="w-[3px] bg-[#FFF2DE]" />
