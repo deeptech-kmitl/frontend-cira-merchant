@@ -159,16 +159,20 @@ const About = () => {
             </div>
           </div>
           <div className="w-full grid lg:grid-cols-2 px-20 items-center z-10">
-            <div className="grid grid-rows-2 space-y-10 justify-center hidden lg:inline-block">
+            <div className="lg:grid grid-rows-2 space-y-10 justify-center hidden">
               {imageDeepDetects.image}
               {imageDeepDetects.image}
             </div>
-            <div className="grid items-center hidden lg:inline-block">{imageDeepDetects.image}</div>
+            <div className="lg:grid items-center hidden">
+              {imageDeepDetects.image}
+            </div>
           </div>
         </div>
       </div>
       {bg_svgs.map((item: bg_svg, i: number) => (
-        <div key={i} className="hidden lg:block">{item.image}</div>
+        <div key={i} className="hidden lg:block">
+          {item.image}
+        </div>
       ))}
       <div className="lg:h-24" />
     </div>
