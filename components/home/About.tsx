@@ -114,7 +114,7 @@ const About = () => {
           </p>
         </div>
         <div className="h-20" />
-        <div className="flex grid grid-cols-3 gap-4 ">
+        <div className="grid grid-cols-3 gap-4 ">
           {benefits.map((item: benefit, i: number) => (
             <div className="group" key={i}>
               <div className="grid py-10 rounded-md group-hover:bg-[#F2BD6F] duration-200 transition-all ease-in-out">
@@ -134,8 +134,8 @@ const About = () => {
           ))}
         </div>
         <div className="h-52" />
-        <div className="flex grid grid-cols-2 gap-4">
-          <div className="w-full grid">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="grid w-full">
             <p className="text-2xl text-[#73532C] font-medium">
               Intelligent Design Templates for Social Media Content{' '}
             </p>
@@ -150,22 +150,20 @@ const About = () => {
               {listBenefits.map((item: listBenefit, i: number) => (
                 <p className="leading-7" key={i}>
                   <RiCheckboxBlankFill className="inline text-[#CF9339] mr-2" />
-                  <p className="text-[#CF9339] font-bold inline">
+                  <span className="text-[#CF9339] font-bold inline">
                     {item.title}:
-                  </p>{' '}
+                  </span>{' '}
                   {item.detail}
                 </p>
               ))}
             </div>
           </div>
-          <div className="w-full grid grid-cols-2 px-20 justify-center items-center z-10">
-            <div className="flex grid grid-rows-2 space-y-10 justify-center">
+          <div className="w-full grid grid-cols-2 px-20 items-center z-10">
+            <div className="grid grid-rows-2 space-y-10 justify-center">
               {imageDeepDetects.image}
               {imageDeepDetects.image}
             </div>
-            <div className="flex grid items-center justify-end">
-              {imageDeepDetects.image}
-            </div>
+            <div className="grid items-center">{imageDeepDetects.image}</div>
           </div>
         </div>
       </div>
