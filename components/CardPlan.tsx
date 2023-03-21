@@ -54,7 +54,7 @@ const data: plan[] = [
 ];
 const CardPlan = () => {
   return (
-    <div className="flex justify-center px-10 xl:mx-12 my-10 flex-col lg:flex-row">
+    <div className="flex justify-center px-10 lg:px-0 my-10 flex-col lg:flex-row">
       {data.map((item: plan, i: number) => (
         <div
           key={i}
@@ -68,7 +68,7 @@ const CardPlan = () => {
             </h1>
             <h1
               className={`text-[15px] text-[#D48A3A] ${
-                i == 2 ? 'border-2 text-center xl:w-1/2' : ''
+                i == 2 ? 'border-2 text-center min-[1420px]:w-1/2' : ''
               }`}
             >
               {item.subTitle}
@@ -125,7 +125,9 @@ const CardPlan = () => {
               }`}
             >
               <div className="flex justify-between">
-                <p className="text-[16px]">Choose plan</p>
+                <p className="text-[14px] xl:text-[16px] flex flex-col justify-center">
+                  Choose plan
+                </p>
                 <svg
                   width="24"
                   height="24"
