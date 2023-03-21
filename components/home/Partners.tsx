@@ -39,7 +39,7 @@ const img_partners: img_partner[] = [
 
 const Partners = () => {
   return (
-    <div className="w-full md:h-max h-screen md:mb-48 mb-24 md:bg-[url('/images/hero_bg.png')] bg-top bg-cover flex justify-center items-center">
+    <div className="bg-transparent w-full md:h-max h-screen md:mb-48 mb-24 flex justify-center items-center">
       <div className="flex flex-col space-y-12 justify-center">
         <div className="flex justify-center">
           <p className="lg:w-2/3 md:w-3/4 text-center text-2xl md:text-4xl font-bold bg-gradient-to-r from-[#9A5F06] via-[#BE911F] via-[#FCB040] to-[#E4D395] bg-clip-text text-transparent leading-[52px]">
@@ -49,7 +49,18 @@ const Partners = () => {
         <div className="flex justify-center">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-20 justify-center items-center fill-current">
             {img_partners.map((item: img_partner, i: number) => (
-              <Image src={item.img} alt="" width={120} height={120} key={i} />
+              <Image
+                src={item.img}
+                alt=""
+                width={130}
+                height={130}
+                style={{
+                  width: 'auto' || 130,
+                  height: 'auto' || 130,
+                  justifySelf: 'center',
+                }}
+                key={i}
+              />
             ))}
           </div>
         </div>
