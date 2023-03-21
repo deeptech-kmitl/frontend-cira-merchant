@@ -1,3 +1,4 @@
+export { default as CardPlan } from './CardPlan';
 export { default as Footer } from './Footer';
 export { default as About } from './home/About';
 export { default as Cases } from './home/Cases';
