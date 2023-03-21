@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <div className="w-full flex justify-between items-center py-8">
       <Link href="/" className="relative h-[65px] w-[90px] hidden lg:block">
-        <Image src="/images/cira_logo.png" fill alt="" priority />
+        <Image src="/images/cira_logo.png" fill alt="" priority sizes="65px" />
       </Link>
       <div className="block lg:hidden">
         <MobileNav tab={tab} />

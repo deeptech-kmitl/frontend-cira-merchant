@@ -9,7 +9,14 @@ const Hero = () => {
   return (
     <div className="w-full min-h-screen">
       <div className="hidden md:block absolute left-0 -z-10">
-        <Image src="/images/elem_l.png" width={400} height={300} alt="" />
+        <Image
+          src="/images/elem_l.png"
+          width={400}
+          height={300}
+          alt=""
+          style={{ width: 'auto', height: 'auto' }}
+          priority
+        />
       </div>
       <div className="flex justify-center py-32 md:py-40">
         <div className="lg:w-3/5 flex flex-col justify-center items-center text-center space-y-14">
@@ -45,7 +52,14 @@ const Hero = () => {
         </div>
       </div>
       <div className="block absolute right-0 top-60 -z-10">
-        <Image src="/images/elem_r.png" width={400} height={300} alt="" />
+        <Image
+          src="/images/elem_r.png"
+          width={400}
+          height={300}
+          priority
+          style={{ width: 'auto', height: 'auto' }}
+          alt=""
+        />
       </div>
       <div className="md:min-h-screen py-32 z-10">
         <div
@@ -53,13 +67,31 @@ const Hero = () => {
           style={{ height: '150vh' }}
         />
         <div className="absolute left-3/4">
-          <Image src="/svgs/skeleton.svg" width={200} height={200} alt="" />
+          <Image
+            src="/svgs/skeleton.svg"
+            width={200}
+            height={200}
+            style={{ width: 'auto', height: 'auto' }}
+            alt=""
+          />
         </div>
         <div className="flex justify-center">
-          <Image src="/images/cira_logo.png" width={730} height={516} alt="" />
+          <Image
+            src="/images/cira_logo.png"
+            width={730}
+            height={516}
+            style={{ width: 'auto', height: 'auto' }}
+            alt=""
+          />
         </div>
         <div className="absolute right-3/4">
-          <Image src="/svgs/skeleton.svg" width={200} height={200} alt="" />
+          <Image
+            src="/svgs/skeleton.svg"
+            width={200}
+            height={200}
+            style={{ width: 'auto', height: 'auto' }}
+            alt=""
+          />
         </div>
       </div>
     </div>

@@ -69,6 +69,7 @@ const imageDeepDetects: imageDeepDetect = {
   image: (
     <Image
       src="/svgs/deepdetect.svg"
+      style={{ width: 'auto', height: 'auto' }}
       alt=""
       priority
       width={150}
@@ -85,6 +86,7 @@ const bg_svgs: bg_svg[] = [
         alt=""
         width={350}
         height={350}
+        style={{ width: 'auto', height: 'auto' }}
         className="absolute top-2/4 right-0 bottom-0"
       />
     ),
@@ -96,6 +98,7 @@ const bg_svgs: bg_svg[] = [
         alt=""
         width={500}
         height={500}
+        style={{ width: 'auto', height: 'auto' }}
         className="absolute right-0 bottom-0"
       />
     ),
