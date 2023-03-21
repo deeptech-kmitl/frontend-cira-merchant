@@ -7,6 +7,7 @@ import {
   Hero,
   Navbar,
   Support,
+  Partners,
 } from '@/components';
 import Head from 'next/head';
 
@@ -19,6 +20,7 @@ export default function Home() {
       <GridLayout>
         <Navbar />
         <Hero />
+        <Partners />
         <About />
         <Cases />
         <Support />
