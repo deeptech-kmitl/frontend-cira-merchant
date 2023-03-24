@@ -4,6 +4,7 @@ interface plan {
   price: string;
   feature: any;
 }
+
 const data: plan[] = [
   {
     title: 'Education',
@@ -52,6 +53,7 @@ const data: plan[] = [
     ],
   },
 ];
+
 const CardPlan = () => {
   return (
     <div className="flex justify-center px-10 lg:px-0 my-10 flex-col lg:flex-row">
@@ -59,7 +61,7 @@ const CardPlan = () => {
         <div
           key={i}
           className={`bg-[#FFFFFF] xl:mx-4 m-2 w-full lg:max-w-[230px] xl:max-w-[273px] shadow drop-shadow-xl overflow-hidden ${
-            i == 2 ? 'lg:scale-[105%]' : ''
+            i === 2 ? 'lg:scale-[105%]' : ''
           }`}
         >
           <div className="border-l-2 border-[#FFF2DE] p-6">
@@ -143,7 +145,7 @@ const CardPlan = () => {
               </div>
             </button>
           </div>
-          <div className="border-l-2 border-[#E5BD82] h-1/4"></div>
+          <div className="border-l-2 border-[#E5BD82] h-1/4" />
         </div>
       ))}
     </div>

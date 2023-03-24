@@ -6,8 +6,8 @@ import {
   GridLayout,
   Hero,
   Navbar,
-  Support,
   Partners,
+  Support,
 } from '@/components';
 import Head from 'next/head';
 

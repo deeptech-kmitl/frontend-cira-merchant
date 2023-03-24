@@ -69,6 +69,7 @@ const imageDeepDetects: imageDeepDetect = {
   image: (
     <Image
       src="/svgs/deepdetect.svg"
+      style={{ width: 'auto', height: 'auto' }}
       alt=""
       priority
       width={150}
@@ -85,6 +86,7 @@ const bg_svgs: bg_svg[] = [
         alt=""
         width={350}
         height={350}
+        style={{ width: 'auto', height: 'auto' }}
         className="absolute top-2/4 right-0 bottom-0"
       />
     ),
@@ -96,6 +98,7 @@ const bg_svgs: bg_svg[] = [
         alt=""
         width={500}
         height={500}
+        style={{ width: 'auto', height: 'auto' }}
         className="absolute right-0 bottom-0"
       />
     ),
@@ -104,21 +107,21 @@ const bg_svgs: bg_svg[] = [
 
 const About = () => {
   return (
-    <div className="w-full h-max bg-[#FFFFFF] relative">
-      <div className="container mx-auto py-8">
+    <div className="w-full h-max relative">
+      <div className="container mx-auto">
         <div className="flex justify-center">
-          <p className="w-6/12 text-center text-2xl text-[#73532C] font-medium">
+          <p className="lg:w-5/12 md:w-10/12  text-center md:text-2xl text-xl  text-[#73532C] font-medium">
             dedicated to making our products accessible and affordable to
             businesses of all sizes, so that everyone can benefit from the power
             of robotics.
           </p>
         </div>
         <div className="h-20" />
-        <div className="grid grid-cols-3 gap-4 ">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:md:gap-4 md:gap-3">
           {benefits.map((item: benefit, i: number) => (
             <div className="group" key={i}>
-              <div className="grid py-10 rounded-md group-hover:bg-[#F2BD6F] duration-200 transition-all ease-in-out">
-                <div className="mx-14 rounded-lg">
+              <div className="grid md:py-10 py-6 rounded-md group-hover:bg-[#F2BD6F] duration-200 transition-all ease-in-out">
+                <div className="lg:mx-14 md:mx-10 mx-7 rounded-lg">
                   <div className="w-16 h-16 text-white bg-[#F3BE70] rounded-lg drop-shadow-2xl group-hover:bg-[#FFE5AB] flex justify-center items-center duration-200 transition-all ease-in-out">
                     {item.icon}
                   </div>
@@ -133,10 +136,10 @@ const About = () => {
             </div>
           ))}
         </div>
-        <div className="h-52" />
-        <div className="grid grid-cols-2 gap-4">
+        <div className="lg:h-52 h-32" />
+        <div className="grid lg:grid-cols-2 lg:gap-4">
           <div className="grid w-full">
-            <p className="text-2xl text-[#73532C] font-medium">
+            <p className="md:text-2xl text-xl text-[#73532C] font-medium">
               Intelligent Design Templates for Social Media Content{' '}
             </p>
             <p className="my-6 text-[#697B98] leading-7">
@@ -158,19 +161,23 @@ const About = () => {
               ))}
             </div>
           </div>
-          <div className="w-full grid grid-cols-2 px-20 items-center z-10">
-            <div className="grid grid-rows-2 space-y-10 justify-center">
+          <div className="w-full grid lg:grid-cols-2 px-20 items-center z-10">
+            <div className="lg:grid grid-rows-2 space-y-10 justify-center hidden">
               {imageDeepDetects.image}
               {imageDeepDetects.image}
             </div>
-            <div className="grid items-center">{imageDeepDetects.image}</div>
+            <div className="lg:grid items-center hidden">
+              {imageDeepDetects.image}
+            </div>
           </div>
         </div>
       </div>
       {bg_svgs.map((item: bg_svg, i: number) => (
-        <div key={i}>{item.image}</div>
+        <div key={i} className="hidden lg:block">
+          {item.image}
+        </div>
       ))}
-      <div className="h-24" />
+      <div className="lg:h-24" />
     </div>
   );
 };

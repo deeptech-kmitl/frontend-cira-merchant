@@ -8,19 +8,22 @@ interface tab {
 }
 
 const leadingTab: tab[] = [
-  { title: 'Contact us On Facebook Page', href: '/' },
+  {
+    title: 'Contact us On Facebook Page',
+    href: 'https://www.facebook.com/profile.php?id=100057872820785',
+  },
   { title: 'Get Help From Community', href: '/' },
   { title: 'Get Help From About CiRA Education', href: '/' },
 ];
 
 const Support = () => {
   return (
-    <div className="w-full min-h-fit py-52 flex justify-between items-center">
-      <div className="absolute right-0">
-        <Image src="/images/fbpage.png" width={700} height={700} alt="" />
+    <div className="w-full min-h-fit py-20 md:py-52 lg:flex lg:justify-between lg:first-letter:items-center">
+      <div className="hidden lg:block absolute right-0">
+        <Image src="/images/fbpage.png" width={900} height={500} alt="" />
       </div>
-      <div className="flex flex-col space-y-6 w-2/5">
-        <h3 className="text-dark-brown text-3xl font-semibold">
+      <div className="flex flex-col space-y-6 lg:w-2/5">
+        <h3 className="text-dark-brown text-2xl md:text-3xl font-semibold">
           Get Support 24/7 on
           <span className="underline"> All Social Media:</span> Facebook,
           Instagram & Twitter

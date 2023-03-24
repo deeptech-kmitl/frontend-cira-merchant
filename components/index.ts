@@ -7,6 +7,7 @@ export { default as Hero } from './home/Hero';
 export { default as Partners } from './home/Partners';
 export { default as Support } from './home/Support';
 export { default as GridLayout } from './layout/GridLayout';
+export { default as MobileNav } from './MobileNav';
 export { default as Navbar } from './Navbar';
 export { default as OutlinedButton } from './shared/OutlinedButton';
 export { default as PrimaryButton } from './shared/PrimaryButton';

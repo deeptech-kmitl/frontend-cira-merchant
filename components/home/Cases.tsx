@@ -82,7 +82,7 @@ const Cases = () => {
                     className="w-[300px] h-[200px] md:w-[650px] md:h-[415px] lg:w-[760px] rounded-2xl"
                     src="https://www.youtube.com/embed/PMF6dcX3f8c"
                     title="FIBO Talk Series EP.13 CIRA CORE คืออะไร และนำไปใช้ประโยชน์ได้อย่างไร"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   />
                 </div>
               </div>
