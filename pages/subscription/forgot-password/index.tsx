@@ -6,6 +6,20 @@ type state = 'enter email' | 'send email';
 
 export default function ForgotPassword() {
   const [step, setStep] = useState<state>('enter email');
+  const [email, setEmail] = useState('');
+  const [isError, setError] = useState(false);
+
+  const submitEmail = () => {
+    fetch(`http://localhost:3333/v1/auth/forgot-password/${email}`, {
+      method: 'POST',
+    }).then((response) => {
+      if (response.ok) {
+        setStep('send email');
+      } else {
+        setError(!isError);
+      }
+    });
+  };
 
   return (
     <GridLayout>
@@ -30,9 +44,16 @@ export default function ForgotPassword() {
                   type="text"
                   className="border border-[#D2CFCF] bg-[#F9FAFB] rounded-md p-3 placeholder-text-[#8C939D]"
                   placeholder="example@gmail.com"
+                  onChange={(event) => setEmail(event.target.value)}
                 />
-
-                <FloatButton action={() => setStep('send email')}>
+                <p
+                  className={`${
+                    isError ? 'block' : 'hidden'
+                  } text-red-600 font-semibold`}
+                >
+                  Incorrect email address
+                </p>
+                <FloatButton action={() => submitEmail()}>
                   <p>Confirm Email</p>
                 </FloatButton>
               </>
