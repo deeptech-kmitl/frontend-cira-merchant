@@ -1,5 +1,6 @@
 import { CardFrame, FloatButton, GridLayout } from '@/components';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 type state = 'enter email' | 'send email';
@@ -68,12 +69,15 @@ export default function ForgotPassword() {
                 <FloatButton>
                   <p>Open your email</p>
                 </FloatButton>
-                <p className="text-[#737373] font-sm text-center">
+                <Link href="/" className="text-[#737373] font-sm text-center">
                   Skip, I&apos;ll confirm later
-                </p>
+                </Link>
                 <p className="pt-12 text-center">
                   Did not receive the email? Check your spam filter, or{' '}
-                  <span className="text-[#D48A3A]">
+                  <span
+                    onClick={() => window.location.reload()}
+                    className="text-[#D48A3A] cursor-pointer"
+                  >
                     try another email address
                   </span>
                 </p>
