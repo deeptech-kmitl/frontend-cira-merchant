@@ -8,15 +8,17 @@ export default function ForgotPassword() {
   const [step, setStep] = useState<state>('enter email');
   const [email, setEmail] = useState('');
   const [isError, setError] = useState(false);
+  const url = process.env.BACKEND_URL;
 
   const submitEmail = () => {
-    fetch(`http://localhost:3333/v1/auth/forgot-password/${email}`, {
+    fetch(`${url}/v1/auth/forgot-password/${email}`, {
       method: 'POST',
     }).then((response) => {
       if (response.ok) {
         setStep('send email');
+        setError(false);
       } else {
-        setError(!isError);
+        setError(true);
       }
     });
   };
