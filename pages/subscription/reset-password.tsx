@@ -1,14 +1,45 @@
 import { CardFrame, FloatButton, GridLayout } from '@/components';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Reset() {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const url = process.env.BACKEND_URL;
+  const router = useRouter();
+  const { token } = router.query;
+
+  const changePassword = () => {
+    const formBody = { token: token, newPassword: password };
+    fetch(`${url}/v1/auth/reset-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formBody),
+    });
+  };
+  //i4mN0taRob0t
 
   const checkPassword = (pw: string, cf: string) => {
-    if (pw.match(cf)) alert('success');
-    else alert('password did not match');
+    if (pw.length > 8 && /[A-Z]/.test(pw)) {
+      if (pw.match(cf)) {
+        setError(false);
+        changePassword();
+      } else {
+        setErrorMessage('password did not match');
+        setError(true);
+      }
+    } else {
+      setErrorMessage(
+        'password must contain a minimum of 8 characters with at least one uppercase and one number'
+      );
+      setError(true);
+    }
   };
 
   return (
@@ -43,6 +74,13 @@ export default function Reset() {
               className="border border-[#D2CFCF] bg-[#F9FAFB] rounded-md p-3 placeholder-text-[#8C939D]"
               onChange={(event) => setConfirm(event.target.value)}
             />
+            <p
+              className={`${
+                isError ? 'block' : 'hidden'
+              } text-red-600 font-semibold`}
+            >
+              {errorMessage}
+            </p>
             <FloatButton action={() => checkPassword(password, confirm)}>
               <p>Confirm Email</p>
             </FloatButton>
