@@ -1,54 +1,26 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import useSWR from 'swr';
-
 let port = 'http://localhost:3333/v1/auth/login';
 
 const Signin = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const { data, mutate } = useSWR(port, fetch);
   async function login() {
     let user = {
       identifier: userName,
       password: password,
     };
-    let response = await mutate(
-      fetch(port, {
-        method: 'POST',
-        headers: ,
-        body: JSON.stringify(user),
-      })
-    );
-    console.log(response);
-
-    // try {
-    //   await mutate(
-    //     fetch('/api/todos', {
-    //       method: 'POST',
-    //       body: JSON.stringify(user)
-    //     }),
-    //     {
-    //       optimisticData: [...data, user],
-    //       rollbackOnError: true,
-    //       populateCache: newItem => {
-
-    //         return [...data, newItem]
-    //       },
-    //       revalidate: true
-    //     }
-    //   )
-    // } catch (e) {
-    //     return e
-    // }
-    // const respon = await response.json();
-    // console.log(respon);
-    console.log(data);
+    let response = await fetch(port, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*',
+      },
+      body: JSON.stringify(user),
+    });
+    const respon = await response.json();
+    console.log(respon);
   }
-  // let response: Response = await fetch(port, {
-  //   method: 'POST',
-  //   body: JSON.stringify(data),
-  // });
 
   return (
     <div className="h-screen flex justify-center">
