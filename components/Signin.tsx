@@ -1,9 +1,55 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import useSWR from 'swr';
+
+let port = 'http://localhost:3333/v1/auth/login';
 
 const Signin = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const { data, mutate } = useSWR(port, fetch);
+  async function login() {
+    let user = {
+      identifier: userName,
+      password: password,
+    };
+    let response = await mutate(
+      fetch(port, {
+        method: 'POST',
+        headers: ,
+        body: JSON.stringify(user),
+      })
+    );
+    console.log(response);
+
+    // try {
+    //   await mutate(
+    //     fetch('/api/todos', {
+    //       method: 'POST',
+    //       body: JSON.stringify(user)
+    //     }),
+    //     {
+    //       optimisticData: [...data, user],
+    //       rollbackOnError: true,
+    //       populateCache: newItem => {
+
+    //         return [...data, newItem]
+    //       },
+    //       revalidate: true
+    //     }
+    //   )
+    // } catch (e) {
+    //     return e
+    // }
+    // const respon = await response.json();
+    // console.log(respon);
+    console.log(data);
+  }
+  // let response: Response = await fetch(port, {
+  //   method: 'POST',
+  //   body: JSON.stringify(data),
+  // });
+
   return (
     <div className="h-screen flex justify-center">
       <div className="w-full px-12 max-w-[500px] gap-10 h-auto max-h-[700px] flex flex-col items-center shadow-lg">
@@ -59,7 +105,10 @@ const Signin = () => {
               console.log(password);
             }}
           />
-          <button className="bg-[#FCB040] py-2.5 text-white hover:bg-white hover:text-[#FCB040] border border-[#FCB040]">
+          <button
+            onClick={login}
+            className="bg-[#FCB040] py-2.5 text-white hover:bg-white hover:text-[#FCB040] border border-[#FCB040]"
+          >
             Login
           </button>
         </div>
