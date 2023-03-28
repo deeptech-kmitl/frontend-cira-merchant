@@ -8,14 +8,16 @@ const Signin = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [check, setCheck] = useState(false);
-  const [nameEmpty, setNameEmpty] = useState('hello');
-  const [passwordEmpty, setPasswordEmpty] = useState('hello');
+  const [correct, setCorrect] = useState(true);
+  const [nameEmpty, setNameEmpty] = useState(false);
+  const [passwordEmpty, setPasswordEmpty] = useState(false);
   async function login() {
     let user = {
       identifier: userName,
       password: password,
     };
-    if (userName != '' && password != '') {
+    let respon = {};
+    if (userName && password) {
       let response = await fetch(port, {
         method: 'POST',
         headers: {
@@ -24,7 +26,14 @@ const Signin = () => {
         },
         body: JSON.stringify(user),
       });
-      const respon = await response.json();
+      if (response.ok) {
+        setCorrect(true);
+        respon = await response.json();
+        alert('Login complete');
+      } else {
+        setCorrect(false);
+        alert('Check your email or password');
+      }
       console.log(respon);
     }
   }
@@ -33,7 +42,7 @@ const Signin = () => {
     <div className="flex justify-center gap-12 min-h-screen items-center">
       <div className="p-3 w-full max-w-[800px] lg:p-12 gap-10 max-h-[847px] flex flex-col items-center shadow-lg mb-6">
         <Image src="/images/cira_logo.png" alt="" width={234} height={92} />
-        <h1>Welcome back</h1>
+        <h1 className="text-2xl">Welcome back</h1>
         <button
           type="button"
           className="flex tect-[19px] items-center justify-center text-black bg-[#FFFFFF] text-[24px] shadow-lg hover:shadow-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
@@ -69,18 +78,27 @@ const Signin = () => {
           <div className="bg-black hidden sm:block w-[270px] max-w-[270px] h-[1px]"></div>
         </div>
         <div className="w-full flex flex-col gap-5 ">
+          {!correct && (
+            <p className="text-red-600 text-center">
+              The email/username or password is incorrect.
+            </p>
+          )}
           <div>
             <input
               type="text"
               className="w-full"
               placeholder="Username or Email"
               onChange={(e) => {
-                setNameEmpty(e.target.value);
+                if (e.target.value === '') {
+                  setNameEmpty(true);
+                } else {
+                  setNameEmpty(false);
+                }
                 setUserName(e.target.value);
                 console.log(userName);
               }}
             />
-            {!nameEmpty && (
+            {nameEmpty && (
               <p className="text-red-600">
                 Please provide your username/email.
               </p>
@@ -92,12 +110,16 @@ const Signin = () => {
               type="password"
               placeholder="Password"
               onChange={(e) => {
-                setPasswordEmpty(e.target.value);
+                if (e.target.value === '') {
+                  setPasswordEmpty(true);
+                } else {
+                  setPasswordEmpty(false);
+                }
                 setPassword(e.target.value);
                 console.log(password);
               }}
             />
-            {!passwordEmpty && (
+            {passwordEmpty && (
               <p className="text-red-600">Please provide your password.</p>
             )}
           </div>
@@ -120,7 +142,17 @@ const Signin = () => {
           </div>
 
           <button
-            onClick={login}
+            onClick={() => {
+              if (userName && password) {
+                login();
+              }
+              if (!nameEmpty && !userName) {
+                setNameEmpty(true);
+              }
+              if (!passwordEmpty && !password) {
+                setPasswordEmpty(true);
+              }
+            }}
             className="bg-[#FCB040] py-2.5 text-white hover:bg-[#FFFFFF] hover:text-[#FCB040] border border-[#FCB040]"
           >
             Sign in to your account
