@@ -29,10 +29,8 @@ const Signin = () => {
       if (response.ok) {
         setCorrect(true);
         respon = await response.json();
-        alert('Login complete');
       } else {
         setCorrect(false);
-        alert('Check your email or password');
       }
       console.log(respon);
     }
@@ -41,8 +39,11 @@ const Signin = () => {
   return (
     <div className="flex justify-center gap-12 min-h-screen items-center">
       <div className="p-3 w-full max-w-[800px] lg:p-12 gap-10 max-h-[847px] flex flex-col items-center shadow-lg mb-6">
-        <Image src="/images/cira_logo.png" alt="" width={234} height={92} />
-        <h1 className="text-2xl">Welcome back</h1>
+        <div className="flex flex-col justify-start w-full">
+          <Image src="/images/cira_logo.png" alt="" width={234} height={92} />
+          <h1 className="text-2xl font-semibold">Welcome back</h1>
+        </div>
+
         <button
           type="button"
           className="flex tect-[19px] items-center justify-center text-black bg-[#FFFFFF] text-[24px] shadow-lg hover:shadow-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
@@ -95,7 +96,6 @@ const Signin = () => {
                   setNameEmpty(false);
                 }
                 setUserName(e.target.value);
-                console.log(userName);
               }}
             />
             {nameEmpty && (
@@ -129,7 +129,6 @@ const Signin = () => {
                 type="checkbox"
                 onChange={() => {
                   setCheck(!check);
-                  console.log(check);
                 }}
               />
               <p>Remember me</p>
