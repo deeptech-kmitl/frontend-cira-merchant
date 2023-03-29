@@ -6,7 +6,7 @@ interface Props {
 const FloatButton = ({ children, action }: Props) => {
   return (
     <button
-      className="bg-[#FCB040] text-white shadow-md shadow-[#FCB040]/30 py-3 rounded-md"
+      className="bg-[#FCB040] w-full text-white shadow-md shadow-[#FCB040]/30 py-3 rounded-md"
       onClick={action}
     >
       {children}
