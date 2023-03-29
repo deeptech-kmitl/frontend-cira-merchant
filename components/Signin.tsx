@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import GmailLogo from './GmailLogo';
 
 let port = 'http://localhost:3333/v1/auth/login';
 
@@ -29,6 +30,8 @@ const Signin = () => {
       if (response.ok) {
         setCorrect(true);
         respon = await response.json();
+        window.localStorage.setItem('UserToken', JSON.stringify(respon));
+        window.location.href = '/';
       } else {
         setCorrect(false);
       }
@@ -40,43 +43,24 @@ const Signin = () => {
     <div className="flex justify-center gap-12 min-h-screen items-center">
       <div className="p-3 w-full max-w-[800px] lg:p-12 gap-10 max-h-[847px] flex flex-col items-center shadow-lg mb-6">
         <div className="flex flex-col justify-start w-full">
-          <Image src="/images/cira_logo.png" alt="" width={234} height={92} />
+          <Link href={'/'}>
+            <Image src="/images/cira_logo.png" alt="" width={234} height={92} />
+          </Link>
+
           <h1 className="text-2xl font-semibold">Welcome back</h1>
         </div>
 
         <button
           type="button"
-          className="flex tect-[19px] items-center justify-center text-black bg-[#FFFFFF] text-[24px] shadow-lg hover:shadow-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
+          className="flex gap-4 items-center justify-center border border-[#EDEAEA] rounded-md text-black bg-[#FFFFFF] text-[24px] hover:border-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 48 48"
-            width="35px"
-            height="35px"
-          >
-            <path
-              fill="#FFC107"
-              d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-            />
-            <path
-              fill="#FF3D00"
-              d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-            />
-            <path
-              fill="#4CAF50"
-              d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-            />
-            <path
-              fill="#1976D2"
-              d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-            />
-          </svg>
+          <GmailLogo />
           Sign in with Google
         </button>
-        <div className="flex items-center gap-2 w-full justify-center">
-          <div className="bg-black block w-[270px] max-w-[270px] h-[1px]"></div>
-          <p className="leading-3 min-w-[150px]">Or login with Email</p>
-          <div className="bg-black block w-[270px] max-w-[270px] h-[1px]"></div>
+        <div className="flex items-center gap-2 w-full justify-center text-[#8C939D]">
+          <div className="bg-[#8C939D] block w-[350px] max-w-[350px] h-[1px]"></div>
+          <p className="leading-3 min-w-[30px] text-center">Or</p>
+          <div className="bg-[#8C939D] block w-[350px] max-w-[350px] h-[1px]"></div>
         </div>
         <div className="w-full flex flex-col gap-5 ">
           {!correct && (
@@ -87,8 +71,8 @@ const Signin = () => {
           <div>
             <input
               type="text"
-              className="w-full"
-              placeholder="Username or Email"
+              placeholder="Email/Username"
+              className="border w-full border-[#D2CFCF] bg-[#F9FAFB] rounded-md p-3 placeholder-text-[#8C939D]"
               onChange={(e) => {
                 if (e.target.value === '') {
                   setNameEmpty(true);
@@ -106,9 +90,9 @@ const Signin = () => {
           </div>
           <div>
             <input
-              className="w-full"
               type="password"
               placeholder="Password"
+              className="border w-full border-[#D2CFCF] bg-[#F9FAFB] rounded-md p-3 placeholder-text-[#8C939D]"
               onChange={(e) => {
                 if (e.target.value === '') {
                   setPasswordEmpty(true);
@@ -116,7 +100,6 @@ const Signin = () => {
                   setPasswordEmpty(false);
                 }
                 setPassword(e.target.value);
-                console.log(password);
               }}
             />
             {passwordEmpty && (
@@ -124,7 +107,7 @@ const Signin = () => {
             )}
           </div>
           <div className="grid grid-cols-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-[#8C939D]">
               <input
                 type="checkbox"
                 onChange={() => {
@@ -135,7 +118,7 @@ const Signin = () => {
             </div>
             <div className="flex justify-end">
               <Link
-                href="/"
+                href="/subscription/forgot-password"
                 className="relative w-auto hidden lg:block text-[#D48A3A]"
               >
                 <h1>Forgot Password ?</h1>
@@ -159,8 +142,8 @@ const Signin = () => {
           >
             Sign in to your account
           </button>
-          <p>
-            Don't have an account?{' '}
+          <p className="text-[#8C939D]">
+            Don&apos;t have an account?{' '}
             <Link className="text-[#D48A3A]" href={'/'}>
               Sign up
             </Link>
