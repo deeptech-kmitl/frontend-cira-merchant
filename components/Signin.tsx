@@ -74,9 +74,9 @@ const Signin = () => {
           Sign in with Google
         </button>
         <div className="flex items-center gap-2 w-full justify-center">
-          <div className="bg-black hidden sm:block w-[270px] max-w-[270px] h-[1px]"></div>
+          <div className="bg-black block w-[270px] max-w-[270px] h-[1px]"></div>
           <p className="leading-3 min-w-[150px]">Or login with Email</p>
-          <div className="bg-black hidden sm:block w-[270px] max-w-[270px] h-[1px]"></div>
+          <div className="bg-black block w-[270px] max-w-[270px] h-[1px]"></div>
         </div>
         <div className="w-full flex flex-col gap-5 ">
           {!correct && (
@@ -134,7 +134,10 @@ const Signin = () => {
               <p>Remember me</p>
             </div>
             <div className="flex justify-end">
-              <Link href="/" className="relative w-auto hidden lg:block">
+              <Link
+                href="/"
+                className="relative w-auto hidden lg:block text-[#D48A3A]"
+              >
                 <h1>Forgot Password ?</h1>
               </Link>
             </div>
@@ -156,6 +159,12 @@ const Signin = () => {
           >
             Sign in to your account
           </button>
+          <p>
+            Don't have an account?{' '}
+            <Link className="text-[#D48A3A]" href={'/'}>
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
       <div className="hidden 2xl:flex flex-col justify-center">
