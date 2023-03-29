@@ -9,6 +9,7 @@ export { default as Support } from './home/Support';
 export { default as GridLayout } from './layout/GridLayout';
 export { default as MobileNav } from './MobileNav';
 export { default as Navbar } from './Navbar';
+export { default as Period } from './order/Period';
 export { default as CardFrame } from './shared/CardFrame';
 export { default as FloatButton } from './shared/FloatButton';
 export { default as OutlinedButton } from './shared/OutlinedButton';
