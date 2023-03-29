@@ -1,3 +1,4 @@
+import { AiOutlineArrowRight } from 'react-icons/ai';
 import { BsCheckLg } from 'react-icons/bs';
 
 interface CardDetail {
@@ -55,7 +56,7 @@ const Period = () => {
           className="bg-[#fff] rounded-md shadow-lg w-1/5 flex flex-col items-center"
           key={i}
         >
-          <div className="-mt-4 py-1 px-4 bg-[#FCBE40] rounded-full text-[#fff] w-fit">
+          <div className="-mt-4 py-1 px-4 text-[13px] bg-[#FCBE40] rounded-full text-[#fff] w-fit">
             {item.highlighted}
           </div>
           <div className="p-10 flex flex-col space-y-6 divide-y divide-[#000]/10">
@@ -71,13 +72,21 @@ const Period = () => {
             <div className="pt-6">
               {item.points.map((item: Points, j: number) => (
                 <div
-                  className="text-[#D48A3A] flex space-x-2 items-start"
+                  className="text-[#D48A3A] flex space-x-2 items-start justify-start"
                   key={j}
                 >
-                  <BsCheckLg className="w-6 h-6" />
-                  <p className="text-sm">{item.point}</p>
+                  <div className="w-4 h-4">
+                    <BsCheckLg />
+                  </div>
+                  <p className="text-[12px] ">{item.point}</p>
                 </div>
               ))}
+              <button className="mt-4 w-full border border-primary-1">
+                <div className="flex items-center justify-between p-2 text-primary-1 shadow-md hover:text-[#fff] hover:bg-primary-1 transition-all ease-in-out text-[12px]">
+                  <p>Choose plan</p>
+                  <AiOutlineArrowRight />
+                </div>
+              </button>
             </div>
           </div>
         </div>
