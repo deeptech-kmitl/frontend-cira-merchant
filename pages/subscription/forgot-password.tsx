@@ -1,11 +1,28 @@
 import { CardFrame, FloatButton, GridLayout } from '@/components';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 type state = 'enter email' | 'send email';
 
 export default function ForgotPassword() {
   const [step, setStep] = useState<state>('enter email');
+  const [email, setEmail] = useState('');
+  const [isError, setError] = useState(false);
+  const url = process.env.BACKEND_URL;
+
+  const submitEmail = () => {
+    fetch(`${url}/v1/auth/forgot-password/${email}`, {
+      method: 'POST',
+    }).then((response) => {
+      if (response.ok) {
+        setStep('send email');
+        setError(false);
+      } else {
+        setError(true);
+      }
+    });
+  };
 
   return (
     <GridLayout>
@@ -30,9 +47,16 @@ export default function ForgotPassword() {
                   type="text"
                   className="border border-[#D2CFCF] bg-[#F9FAFB] rounded-md p-3 placeholder-text-[#8C939D]"
                   placeholder="example@gmail.com"
+                  onChange={(event) => setEmail(event.target.value)}
                 />
-
-                <FloatButton action={() => setStep('send email')}>
+                <p
+                  className={`${
+                    isError ? 'block' : 'hidden'
+                  } text-red-600 font-semibold`}
+                >
+                  Incorrect email address
+                </p>
+                <FloatButton action={() => submitEmail()}>
                   <p>Confirm Email</p>
                 </FloatButton>
               </>
@@ -45,12 +69,15 @@ export default function ForgotPassword() {
                 <FloatButton>
                   <p>Open your email</p>
                 </FloatButton>
-                <p className="text-[#737373] font-sm text-center">
+                <Link href="/" className="text-[#737373] font-sm text-center">
                   Skip, I&apos;ll confirm later
-                </p>
+                </Link>
                 <p className="pt-12 text-center">
                   Did not receive the email? Check your spam filter, or{' '}
-                  <span className="text-[#D48A3A]">
+                  <span
+                    onClick={() => window.location.reload()}
+                    className="text-[#D48A3A] cursor-pointer"
+                  >
                     try another email address
                   </span>
                 </p>
