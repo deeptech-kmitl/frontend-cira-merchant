@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GmailLogo from './GmailLogo';
 
 let port = 'http://localhost:3333/v1/auth/login';
 
 const Signin = () => {
+  const router = useRouter();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [check, setCheck] = useState(false);
@@ -31,7 +33,7 @@ const Signin = () => {
         setCorrect(true);
         respon = await response.json();
         window.localStorage.setItem('UserToken', JSON.stringify(respon));
-        window.location.href = '/';
+        router.push('/purchase');
       } else {
         setCorrect(false);
       }
@@ -65,7 +67,7 @@ const Signin = () => {
         <div className="w-full flex flex-col gap-5 ">
           {!correct && (
             <p className="text-red-600 text-center">
-              The email/username or password is incorrect.
+              Email, username or password is incorrect.
             </p>
           )}
           <div>
