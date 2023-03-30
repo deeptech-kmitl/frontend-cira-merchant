@@ -108,7 +108,7 @@ const Payment = () => {
             <div className="p-4 flex flex-col gap-y-2">
               <div className="flex justify-between">
                 <h1 className="text-[#32332E] text-3xl">Total</h1>
-                <p className="text-[#32332E] text-2xl">฿ 454.83</p>
+                <p className="text-[#32332E] text-2xl">฿ 455.66</p>
               </div>
               <Link className="text-[#D48A3A]" href={''}>
                 Have a coupon code?
