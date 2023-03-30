@@ -31,19 +31,24 @@ export default function Reset() {
       }
     });
   };
-  
+
   const checkPassword = (pw: string, cf: string) => {
-    if (pw.length > 8 && /[A-Z]/.test(pw)) {
+    if (
+      pw.length >= 8 &&
+      /[A-Z]/.test(pw) &&
+      /[a-z]/.test(pw) &&
+      /[0-9]/.test(pw)
+    ) {
       if (pw.match(cf)) {
         setError(false);
         changePassword();
       } else {
-        setErrorMessage('password did not match');
+        setErrorMessage('Password did not match');
         setError(true);
       }
     } else {
       setErrorMessage(
-        'password must contain a minimum of 8 characters with at least one uppercase and one number'
+        'Password must contain a minimum of 8 characters with at least one uppercase and one number'
       );
       setError(true);
     }
@@ -93,7 +98,7 @@ export default function Reset() {
                 {errorMessage}
               </p>
               <FloatButton action={() => checkPassword(password, confirm)}>
-                <p>Confirm Email</p>
+                <p>Reset Password</p>
               </FloatButton>
             </div>
           ) : (
@@ -106,7 +111,7 @@ export default function Reset() {
                 Your password has been reset successfully. Now login with your
                 new password.
               </p>
-              <FloatButton action={() => router.push('/login')}>
+              <FloatButton action={() => router.push('/sign-in')}>
                 <p>Login</p>
               </FloatButton>
             </div>
