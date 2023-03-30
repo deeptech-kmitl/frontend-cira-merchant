@@ -1,5 +1,6 @@
 import { Country } from '@/data/country';
 import Image from 'next/image';
+import Link from 'next/link';
 import { BsCheck } from 'react-icons/bs';
 import FloatButton from '../shared/FloatButton';
 
@@ -53,7 +54,12 @@ const Payment = () => {
             className="flex space-x-4 items-center py-4 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md"
             key={i}
           >
-            <input type="radio" value={item.value} className="border border-" />
+            <input
+              type="radio"
+              name="bank"
+              value={item.value}
+              className="border border-"
+            />
             <div className="px-5">
               <Image
                 src={item.image}
@@ -111,6 +117,22 @@ const Payment = () => {
               <p>Submit Secure Payment</p>
             </FloatButton>
           </div>
+          <div className="flex flex-col border-[#000000]/10 border-b-2">
+            <div className="p-4 flex flex-col gap-y-2">
+              <div className="flex justify-between">
+                <h1 className="text-[#32332E] text-3xl">Total</h1>
+                <p className="text-[#32332E] text-2xl">฿ 455.66</p>
+              </div>
+              <Link className="text-[#D48A3A]" href={''}>
+                Have a coupon code?
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="m-6">
+          <button className="w-full transition-all ease-in-out p-3 bg-[#FCB040] text-[#FFFFFF] hover:text-[#FCB040] hover:bg-[#FFFFFF] border-[#FCB040] border-2 rounded-lg">
+            Submit Secure Payment
+          </button>
         </div>
       </div>
     </div>
