@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FloatButton } from '.';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const SignUp = () => {
+  const URL = process.env.BACKEND_URL;
   const [confirmPassword, setconfirmPassword] = useState('');
   const [formData, setFormData] = useState({
     email: '',
@@ -12,15 +13,17 @@ const SignUp = () => {
     username: '',
     password: '',
   });
-  const [passwordBlank, setpasswordBlank] = useState(false);
-  const [checkPassword, setcheckPassword] = useState(false);
   const [policy, setpolicy] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [passwordMinimum, setPasswordMinimum] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isTouched, setIsTouched] = useState(false);
 
   const handleInput = (e: { target: { name: any; value: any } }) => {
     let fieldName = e.target.name;
     let fieldValue = e.target.value;
 
-    if (fieldName == 'phone') {
+    if (fieldName === 'phone') {
       fieldValue = e.target.value.slice(0, 10);
     }
 
@@ -29,36 +32,34 @@ const SignUp = () => {
       [fieldName]: fieldValue,
     }));
   };
-  console.log(formData);
 
   async function handleClick() {
-    if (formData.password == '') {
-      setpasswordBlank(true);
-    }
-    if (!formData.password.match(confirmPassword)) {
-      setcheckPassword(true);
-    }
-    if (!policy) {
-      setpolicy(true);
+    setIsTouched(true);
+    if (formData.password.length >= 8 && /[A-Z]/.test(formData.password)) {
+      if (!formData.password.match(confirmPassword)) {
+        setPasswordMatch(true);
+      }
+    } else {
+      setPasswordMinimum(true);
     }
 
-    await fetch('http://localhost:3333/v1/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': '*',
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const resSignUp = await fetch(`${URL}/v1/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    await fetch('http://localhost:3333/v1/auth/check-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': '*',
-      },
-      body: JSON.stringify(formData),
-    });
+      const response = await resSignUp.json();
+      if (typeof response.message === 'string') {
+        setErrorMsg(response.message);
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+
   }
 
   return (
@@ -97,7 +98,7 @@ const SignUp = () => {
                   type="text"
                   id="email"
                   name="email"
-                  className="rounded-lg mb-2"
+                  className="rounded-lg"
                   placeholder="email"
                   value={formData.email}
                   onChange={handleInput}
@@ -174,7 +175,7 @@ const SignUp = () => {
             <input
               type="checkbox"
               className="flex rounded mt-1"
-              onClick={() => setpolicy(true)}
+              onClick={() => setpolicy(!policy)}
             />
             <p className="text-[#8C939D]">
               By signing up, you are creating a Cira core account, and you agree
@@ -188,19 +189,27 @@ const SignUp = () => {
               </span>
             </p>
           </div>
-          {checkPassword && (
-            <p className="text-red-500">* Password don&apos;t match</p>
+
+          {isTouched && (
+            <>
+              {passwordMatch && (
+                <p className="text-red-500">* password did not match</p>
+              )}
+              {passwordMinimum && (
+                <p className="text-red-500">
+                  * password must contain a minimum of 8 characters with at
+                  least one uppercase and one number
+                </p>
+              )}
+              {!policy && (
+                <p className="text-red-500">
+                  * You must agree to the Terms of Service
+                </p>
+              )}
+              {errorMsg && <p className="text-red-500">* {errorMsg}</p>}
+            </>
           )}
-          {policy && (
-            <p className="text-red-500">
-              * You must agree to the Terms of Service
-            </p>
-          )}
-          {passwordBlank && (
-            <p className="text-red-500">* Password can&apos;t be blank</p>
-          )}
-          {/* <p className="text-red-500">* Email or username has been used</p>
-          <p className="text-red-500">* Email must be an email</p> */}
+
           <FloatButton action={handleClick}>
             <p className="font-semibold tracking-wide">Create an account</p>
           </FloatButton>
@@ -209,8 +218,8 @@ const SignUp = () => {
         <div className="flex justify-center items-center">
           <Image
             src="/images/cira_logo.png"
-            width={430}
-            height={216}
+            width={609}
+            height={242}
             style={{ width: 'auto', height: 'auto' }}
             alt=""
           />
