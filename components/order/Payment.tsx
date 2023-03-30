@@ -70,7 +70,7 @@ const Payment = () => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col bg-[#fff] border border-[#C4C4C4] rounded-md w-full divide-y divide-[#000]/10">
+      <div className="flex flex-col justify-between bg-[#fff] border border-[#C4C4C4] rounded-md w-full divide-y divide-[#000]/10">
         <div className="p-6">
           <div className="flex flex-col border-[#000000]/10 border-b-2 py-4 gap-y-2">
             <div className="flex justify-between">
@@ -117,7 +117,7 @@ const Payment = () => {
           </div>
         </div>
         <div className="m-6">
-          <button className="w-full p-3 bg-[#FCB040] text-[#FFFFFF] hover:text-[#FCB040] hover:bg-[#FFFFFF] border-[#FCB040] border-2 rounded-lg">
+          <button className="w-full transition-all ease-in-out p-3 bg-[#FCB040] text-[#FFFFFF] hover:text-[#FCB040] hover:bg-[#FFFFFF] border-[#FCB040] border-2 rounded-lg">
             Submit Secure Payment
           </button>
         </div>
