@@ -1,6 +1,7 @@
 import { Country } from '@/data/country';
 import Image from 'next/image';
 import { BsCheck } from 'react-icons/bs';
+import FloatButton from '../shared/FloatButton';
 
 interface Banking {
   value: string;
@@ -64,24 +65,24 @@ const Payment = () => {
           </div>
         ))}
       </div>
-      <div className="bg-[#fff] border border-[#C4C4C4] rounded-md w-full divide-y divide-[#000]/10">
-        <div className="p-6">
+      <div className="bg-[#fff] border border-[#C4C4C4] rounded-md w-full">
+        <div className="p-6 divide-y divide-[#000]/10 space-y-4">
           <div className="flex flex-col space-y-2">
             <div className="flex justify-between">
               <p className="font-semibold">Professional plan - 24 Month Plan</p>
               <p className="font-medium">฿ 412.83</p>
             </div>
             <div className="flex justify-between">
-              <p className="flex items-center text-[#404D54] font-medium">
+              <div className="flex items-center text-[#404D54] font-medium">
                 <div className="pr-1">
                   <BsCheck className="text-[#26C07D] h-6 w-6" />
                 </div>
                 Setup
-              </p>
+              </div>
               <p className="font-medium">฿ 42.83</p>
             </div>
           </div>
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-4 pt-4">
             <p className="font-semibold">Country</p>
             <select
               name="country"
@@ -93,6 +94,22 @@ const Payment = () => {
                 </option>
               ))}
             </select>
+            <div className="flex justify-between">
+              <p className="font-semibold">Taxes & Fees</p>
+              <p className="font-medium text-sm">฿ 0.00</p>
+            </div>
+          </div>
+          <div className="flex flex-col space-y-4 pt-4">
+            <div className="flex justify-between">
+              <p className="font-semibold text-xl">Total</p>
+              <p className="font-medium text-xl">฿ 454.83</p>
+            </div>
+            <p className="font-medium text-[#D48A3A]">Have a coupon code?</p>
+          </div>
+          <div className="pt-28">
+            <FloatButton>
+              <p>Submit Secure Payment</p>
+            </FloatButton>
           </div>
         </div>
       </div>
