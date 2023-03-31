@@ -1,5 +1,6 @@
 export { default as CardPlan } from './CardPlan';
 export { default as Footer } from './Footer';
+export { default as GmailLogo } from './GmailLogo';
 export { default as About } from './home/About';
 export { default as Cases } from './home/Cases';
 export { default as CTA } from './home/CTA';
@@ -17,4 +18,5 @@ export { default as FloatButton } from './shared/FloatButton';
 export { default as OutlinedButton } from './shared/OutlinedButton';
 export { default as PrimaryButton } from './shared/PrimaryButton';
 export { default as PrimaryChip } from './shared/PrimaryChip';
+export { default as Signin } from './Signin';
 export { default as SignUpWithGoogle } from './SignUpWithGoogle';
