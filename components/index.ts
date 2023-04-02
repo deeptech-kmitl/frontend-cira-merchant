@@ -20,3 +20,5 @@ export { default as PrimaryButton } from './shared/PrimaryButton';
 export { default as PrimaryChip } from './shared/PrimaryChip';
 export { default as Signin } from './Signin';
 export { default as SignUpWithGoogle } from './SignUpWithGoogle';
+export { default as SideBar } from './subscription/SideBar';
+export { default as UserBar } from './subscription/UserBar';
