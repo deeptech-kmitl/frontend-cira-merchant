@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { PrimaryButton } from '..';
 
 interface User {
@@ -27,9 +28,11 @@ const DashBoard = (props: Props) => {
         <p className="text-[#9E9E9E]">
           Looks like you haven&apos;t purchased any plan yet
         </p>
-        <PrimaryButton customClass="w-2/6">
-          <p>Get it now</p>
-        </PrimaryButton>
+        <Link href="subscription" className="w-2/6">
+          <PrimaryButton customClass="w-full">
+            <p>Get it now</p>
+          </PrimaryButton>
+        </Link>
       </div>
     </div>
   );
