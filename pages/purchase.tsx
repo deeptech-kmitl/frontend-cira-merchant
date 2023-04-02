@@ -5,22 +5,22 @@ interface Components {
   component: React.ReactNode;
 }
 
-const component: Components[] = [
-  {
-    title: '1. Choose a period',
-    component: <Period />,
-  },
-  {
-    title: '2. Create your account',
-    component: <Account />,
-  },
-  {
-    title: '3. Select payment',
-    component: <Payment />,
-  },
-];
-
 const Purchase = () => {
+  const component: Components[] = [
+    {
+      title: '1. Choose a period',
+      component: <Period />,
+    },
+    {
+      title: '2. Create your account',
+      component: <Account />,
+    },
+    {
+      title: '3. Select payment',
+      component: <Payment />,
+    },
+  ];
+
   return (
     <div className="bg-[#F9FAFB]">
       <div className="grid grid-cols-12">
