@@ -1,4 +1,12 @@
-import { DashBoard, SideBar, UserBar } from '@/components';
+import {
+  DashBoard,
+  Reports,
+  Settings,
+  SideBar,
+  Subscription,
+  UserBar,
+} from '@/components';
+import TopUp from '@/components/subscription/TopUp';
 import { useRouter } from 'next/router';
 
 interface User {
@@ -17,6 +25,22 @@ const TabComponents: Components[] = [
     path: 'dashboard',
     component: <DashBoard user={Account} />,
   },
+  {
+    path: 'top-up',
+    component: <TopUp />,
+  },
+  {
+    path: 'reports',
+    component: <Reports />,
+  },
+  {
+    path: 'subscription',
+    component: <Subscription />,
+  },
+  {
+    path: 'settings',
+    component: <Settings />,
+  },
 ];
 
 const SubscriptionMod = () => {
@@ -31,11 +55,11 @@ const SubscriptionMod = () => {
       <div className="col-span-10 bg-[#F7F7F7]">
         <div className="p-14">
           <UserBar user={Account} />
-          {TabComponents.map((item: Components, i: number) => (
-            <div className="py-6" key={i}>
-              {path === item.path ? item.component : ''}
-            </div>
-          ))}
+          <div className="py-6">
+            {TabComponents.map((item: Components, i: number) => (
+              <div key={i}>{path === item.path ? item.component : null}</div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

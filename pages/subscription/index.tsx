@@ -5,7 +5,7 @@ interface User {
 
 const Account: User = { name: 'Danupha Khanatheerakul' };
 
-const Subscription = () => {
+const SubscriptionPage = () => {
   return (
     <div className="w-full min-h-screen h-full grid grid-cols-12">
       <div className="col-span-2">
@@ -23,4 +23,4 @@ const Subscription = () => {
   );
 };
 
-export default Subscription;
+export default SubscriptionPage;

@@ -21,5 +21,8 @@ export { default as PrimaryChip } from './shared/PrimaryChip';
 export { default as Signin } from './Signin';
 export { default as SignUpWithGoogle } from './SignUpWithGoogle';
 export { default as DashBoard } from './subscription/DashBoard';
+export { default as Reports } from './subscription/Reports';
+export { default as Settings } from './subscription/Settings';
 export { default as SideBar } from './subscription/SideBar';
+export { default as Subscription } from './subscription/Subscription';
 export { default as UserBar } from './subscription/UserBar';
