@@ -1,4 +1,4 @@
-import { SideBar, UserBar } from '@/components';
+import { DashBoard, SideBar, UserBar } from '@/components';
 interface User {
   name: string;
 }
@@ -15,7 +15,7 @@ const SubscriptionPage = () => {
         <div className="p-14">
           <UserBar user={Account} />
           <div className="py-6">
-            <h1 className="font-semibold text-4xl">This is dashboard</h1>
+            <DashBoard user={Account} />
           </div>
         </div>
       </div>

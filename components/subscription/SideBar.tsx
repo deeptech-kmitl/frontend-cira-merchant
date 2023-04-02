@@ -77,23 +77,26 @@ const SideBar = () => {
               <Link
                 href={`/subscription/${item.path}`}
                 className={`flex space-x-2 items-center text-[#585757] group transition-all ease-in-out hover:bg-[#FFF7E6] rounded-md p-3 ${
-                  router.asPath ===
-                  `/subscription/${item.path} ? 'bg-[#FFF7E6]' : ''`
+                  router.asPath === `/subscription/${item.path}`
+                    ? 'bg-[#FFF7E6]'
+                    : ''
                 }`}
                 key={j}
               >
                 <div
                   className={`group-hover:text-[#FFC700] ${
-                    router.asPath ===
-                    `/subscription/${item.path} ? 'text-[#FFC700]' : ''`
+                    router.asPath === `/subscription/${item.path}`
+                      ? 'text-[#FFC700]'
+                      : ''
                   }`}
                 >
                   {item.icon}
                 </div>
                 <p
                   className={`group-hover:text-[#1C1C1C] group-hover:font-medium ${
-                    router.asPath ===
-                    `/subscription/${item.path} ? 'text-[#1C1C1C] font-medium' : ''`
+                    router.asPath === `/subscription/${item.path}`
+                      ? 'text-[#1C1C1C] font-medium'
+                      : ''
                   }`}
                 >
                   {item.title}
