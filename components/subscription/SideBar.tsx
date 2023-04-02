@@ -25,22 +25,22 @@ const SideNav: Menu[] = [
       {
         icon: <MdSpaceDashboard />,
         title: 'Dashboard',
-        path: '/dashboard',
+        path: 'dashboard',
       },
       {
         icon: <RiBankCard2Line />,
         title: 'Top-up',
-        path: '/top-up',
+        path: 'top-up',
       },
       {
         icon: <TbReportAnalytics />,
         title: 'Reports',
-        path: '/reports',
+        path: 'reports',
       },
       {
         icon: <IoBag />,
         title: 'Subscription',
-        path: '/subscription',
+        path: 'subscription',
       },
     ],
   },
@@ -50,7 +50,7 @@ const SideNav: Menu[] = [
       {
         icon: <IoMdSettings />,
         title: 'Settings',
-        path: '/settings',
+        path: 'settings',
       },
     ],
   },
