@@ -21,7 +21,7 @@ export interface PlanType {
 const data: PlanType[] = [
   {
     title: 'Education',
-    subTitle: 'Blablabla',
+    subTitle: 'Lorem',
     price: '0',
     feature: [
       '50 Payload outputs for AI blocks AI output with watermark',
@@ -55,8 +55,8 @@ const data: PlanType[] = [
   },
   {
     title: 'Enterprises',
-    subTitle: 'Blablabla',
-    price: 'App contact us',
+    subTitle: 'Lorem',
+    price: 'Contact us',
     feature: [
       'Unlimited Payload outputs for AI blocks',
       'Unlimited flows',
