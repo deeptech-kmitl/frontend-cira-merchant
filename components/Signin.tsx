@@ -55,6 +55,9 @@ const Signin = () => {
         <button
           type="button"
           className="flex gap-4 items-center justify-center border border-[#EDEAEA] rounded-md text-black bg-[#FFFFFF] text-[24px] hover:border-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
+          onClick={() => {
+            router.push('http://localhost:3333/v1/google');
+          }}
         >
           <GmailLogo />
           Sign in with Google
