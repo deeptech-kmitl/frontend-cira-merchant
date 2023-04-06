@@ -92,7 +92,7 @@ const Plan = (props: Props) => {
             id="myCheck"
             className={`${
               check ? 'translate-x-12' : num != 0 ? '-translate-x-12' : ''
-            } ml-[3px] p-4 absolute transition-all cursor-pointer rounded-2xl checked:bg-[#FCB040] bg-neutral-300 focus-within:hidden  focus:ring-0 appearance-none border-0`}
+            } ml-[3px] p-4 absolute transition-all cursor-pointer rounded-2xl checked:bg-[#FCB040] bg-[#FCB040] focus:ring-0 border-0`}
           />
           <span>
             <div
