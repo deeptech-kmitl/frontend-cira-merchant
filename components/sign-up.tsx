@@ -13,7 +13,6 @@ const SignUp = () => {
   const router = useRouter();
 
   async function createAccount(values: any) {
-    
     try {
       const register = await fetch(`${URL}/v1/auth/signup`, {
         method: 'POST',
@@ -23,13 +22,11 @@ const SignUp = () => {
         body: JSON.stringify(values),
       });
       const resSignup = await register.json();
-
       if (resSignup.message.includes('successfully')) {
         toast.success(resSignup.message);
       } else {
-        toast.error('Incorrect Email or Username');
+        toast.error(resSignup.message);
       }
-
     } catch (error: any) {
       toast.error('Incorrect');
     }
@@ -121,7 +118,7 @@ const SignUp = () => {
             <button
               className="w-full flex gap-4 p-3 my-4 rounded-xl border border-[#d6d6d6] text-center justify-center items-center"
               onClick={() => {
-                router.push('http://localhost:3333/v1/google');
+                router.push('http://localhost:3333/v1/auth/google');
               }}
             >
               <Image
@@ -305,7 +302,7 @@ const SignUp = () => {
               <button
                 className="w-full flex md:gap-4 gap-2 p-3 my-3 rounded-xl border border-[#d6d6d6] text-center justify-center items-center"
                 onClick={() => {
-                  router.push('http://localhost:3333/v1/google');
+                  router.push('http://localhost:3333/v1/auth/google');
                 }}
               >
                 <Image
