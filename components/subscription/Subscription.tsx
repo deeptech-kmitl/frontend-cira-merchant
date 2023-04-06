@@ -1,3 +1,4 @@
+import { User } from '@/pages/subscription/[path]';
 import { useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import CompletePayment from './CompletePayment';
@@ -16,18 +17,60 @@ export interface PaymentData {
   country: string;
 }
 
+export interface PaymentPayload {
+  amount: number;
+  currency: string;
+  type: string;
+  customerId: string;
+  phone: string;
+  userId: string;
+  email: string;
+  name: string;
+  items: OrderItem;
+}
+
+export interface OrderItem {
+  name: string;
+  amount: number;
+  quantity: number;
+}
+
 interface Component {
   title: string;
   component: React.ReactNode;
   prompt: PaymentStep;
 }
 
-interface User {
-  name: string;
-}
-
 interface Props {
   user: User;
+}
+
+export interface PaymentResponse {
+  data: PaymentResponseData;
+  imageQr: PaymentQr;
+}
+
+export interface PaymentResponseData {
+  createdAt: string;
+  id: string;
+  paymentId: string;
+  planName: string;
+  quantity: number;
+  status: string;
+  updatedAt: string;
+  userId: string;
+}
+
+export interface PaymentQr {
+  created_at: string;
+  deleted: boolean;
+  download_uri: string;
+  filename: string;
+  id: string;
+  kind: string;
+  livemode: boolean;
+  location: string;
+  object: string;
 }
 
 const Subscription = (props: Props) => {
@@ -41,6 +84,60 @@ const Subscription = (props: Props) => {
     plan: '',
     country: '',
   });
+
+  const [payload, setPayload] = useState<PaymentPayload>({
+    amount: 0,
+    currency: 'THB',
+    type: '',
+    customerId: '',
+    phone: '',
+    userId: '',
+    email: '',
+    name: '',
+    items: {
+      name: '',
+      amount: 0,
+      quantity: 0,
+    },
+  });
+
+  const [paymentPending, setPaymentPending] = useState<PaymentResponse>({
+    data: {
+      createdAt: '',
+      id: '',
+      paymentId: '',
+      planName: '',
+      quantity: 0,
+      status: '',
+      updatedAt: '',
+      userId: '',
+    },
+    imageQr: {
+      created_at: '',
+      deleted: false,
+      download_uri: '',
+      filename: '',
+      id: '',
+      kind: '',
+      livemode: false,
+      location: '',
+      object: 'document',
+    },
+  });
+
+  const sendPaymentPayload = () => {
+    console.log(payload);
+    fetch(`https://app-o6mjk54opa-as.a.run.app/v1/payment/charge`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*',
+      },
+      body: JSON.stringify(payload),
+    }).then(async (response) => {
+      setPaymentPending(await response.json());
+    });
+  };
 
   const prevStep = (current: PaymentStep) => {
     current === 'payment method'
@@ -68,18 +165,28 @@ const Subscription = (props: Props) => {
       title: 'Select payment method',
       component: (
         <Payment
+          user={user}
           setStep={setStep}
           plan={plan}
           yearly={check}
           paymentData={paymentData}
           setPaymentData={SetPaymentData}
+          payload={payload}
+          setPayload={setPayload}
+          sendPaymentPayload={sendPaymentPayload}
         />
       ),
       prompt: 'payment method',
     },
     {
-      title: 'Pay with promptpay',
-      component: <CompletePayment user={user} paymentInfo={paymentData} />,
+      title: `Pay with ${paymentData.platform}`,
+      component: (
+        <CompletePayment
+          user={user}
+          paymentInfo={paymentData}
+          paymentReq={paymentPending}
+        />
+      ),
       prompt: 'complete payment',
     },
   ];
@@ -97,7 +204,7 @@ const Subscription = (props: Props) => {
               <div className="py-4">
                 <div className="flex justify-between items-center">
                   <h4 className="text-xl">{item.title}</h4>
-                  {step !== 'choosing plan' && (
+                  {step !== 'choosing plan' && step !== 'complete payment' && (
                     <button
                       className="flex space-x-2 items-center text-[#7C5A00]"
                       onClick={() => prevStep(item.prompt)}

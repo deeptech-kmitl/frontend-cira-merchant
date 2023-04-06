@@ -1,10 +1,11 @@
 import { Country } from '@/data/country';
+import { User } from '@/pages/subscription/[path]';
 import Image from 'next/image';
 import { SetStateAction, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
 import FloatButton from '../shared/FloatButton';
 import { PlanType } from './Plan';
-import { PaymentData, PaymentStep } from './Subscription';
+import { PaymentData, PaymentPayload, PaymentStep } from './Subscription';
 
 interface Banking {
   value: string;
@@ -20,44 +21,58 @@ interface Props {
   setStep: (step: PaymentStep) => void;
   paymentData: PaymentData;
   setPaymentData: (paymentData: PaymentData) => void;
+  payload: PaymentPayload;
+  setPayload: (payload: PaymentPayload) => void;
   plan?: PlanType;
   yearly: boolean;
+  sendPaymentPayload: () => void;
+  user: User;
 }
 
 const paymentBanking: Banking[] = [
   {
-    value: 'True Money',
+    value: 'truemoney',
     image: '/bank/true.png',
   },
   {
-    value: 'Krungsri Bank',
+    value: 'kma',
     image: '/bank/kma.png',
   },
   {
-    value: 'Promptpay',
+    value: 'promptpay',
     image: '/bank/promptpay.png',
   },
   {
-    value: 'Krungthai Bank',
+    value: 'ktb',
     image: '/bank/ktb.png',
   },
   {
-    value: 'Siam Commercial Bank',
+    value: 'scb',
     image: '/bank/scb.png',
   },
   {
-    value: 'K Plus',
+    value: 'kplus',
     image: '/bank/kplus.png',
   },
   {
-    value: 'Bangkok Bank',
+    value: 'bangkokbank',
     image: '/bank/bangkok.png',
   },
 ];
 
 const Payment = (props: Props) => {
-  const { setStep, plan, yearly, paymentData, setPaymentData } = props;
-  const [paymentPlatform, setPaymentPlatform] = useState('Promptpay');
+  const {
+    setStep,
+    plan,
+    yearly,
+    paymentData,
+    payload,
+    setPayload,
+    setPaymentData,
+    sendPaymentPayload,
+    user,
+  } = props;
+  const [paymentPlatform, setPaymentPlatform] = useState('promptpay');
   const [country, setCountry] = useState('');
 
   const onOptionsChange = (e: {
@@ -67,7 +82,6 @@ const Payment = (props: Props) => {
   };
 
   const ConfirmPaymentOptions = () => {
-    setStep('complete payment');
     setPaymentData({
       platform: paymentPlatform,
       price: plan?.price,
@@ -76,14 +90,35 @@ const Payment = (props: Props) => {
       }`,
       country: country,
     });
+
+    setPayload({
+      amount: Number(plan?.price + '00'),
+      currency: 'THB',
+      type: paymentPlatform,
+      customerId: 'cust_test_5vd13tlj6f2tdnz49oy',
+      phone: '',
+      userId: user.id,
+      email: user.email,
+      name: user.name,
+      items: {
+        name: plan ? plan?.title : '',
+        amount: Number(plan?.price + '00'),
+        quantity: 1,
+      },
+    });
+
+    if (payload.items.amount !== 0) {
+      sendPaymentPayload();
+      setStep('complete payment');
+    }
   };
 
   return (
     <div className="w-full flex justify-between space-x-10 pt-10">
-      <div className="flex flex-col space-y-4">
+      <div className="w-2/6 flex flex-col space-y-4">
         {paymentBanking.map((item: Banking, i: number) => (
           <div
-            className="flex space-x-4 items-center py-4 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md"
+            className="flex space-x-4 justify-center items-center py-4 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md"
             key={i}
           >
             <input
@@ -97,7 +132,7 @@ const Payment = (props: Props) => {
             <div className="px-5">
               <Image
                 src={item.image}
-                width={120}
+                width={150}
                 height={50}
                 alt={item.value}
               />
@@ -151,7 +186,11 @@ const Payment = (props: Props) => {
             <p className="font-medium text-[#D48A3A]">Have a coupon code?</p>
           </div>
           <div className="pt-28">
-            <FloatButton action={() => ConfirmPaymentOptions()}>
+            <FloatButton
+              action={() => {
+                ConfirmPaymentOptions();
+              }}
+            >
               <p>Submit Secure Payment</p>
             </FloatButton>
           </div>

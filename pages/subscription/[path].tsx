@@ -10,7 +10,8 @@ import TopUp from '@/components/subscription/TopUp';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-interface User {
+export interface User {
+  id: string;
   email: string;
   role: string;
   name: string;
@@ -36,6 +37,7 @@ const SubscriptionMod = () => {
   let TabComponents: Components[] = [];
   if (data) {
     Account = {
+      id: data.data.id,
       email: data.data.email,
       role: data.data.role,
       name: data.data.username,
