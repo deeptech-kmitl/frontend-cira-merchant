@@ -33,7 +33,7 @@ const Signin = () => {
         setCorrect(true);
         respon = await response.json();
         window.localStorage.setItem('UserToken', JSON.stringify(respon));
-        router.push('/purchase');
+        router.push('/subscription');
       } else {
         setCorrect(false);
       }
