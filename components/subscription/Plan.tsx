@@ -21,8 +21,8 @@ export interface PlanType {
 const data: PlanType[] = [
   {
     title: 'Education',
-    subTitle: 'Blablabla',
-    price: '0.00',
+    subTitle: 'Lorem',
+    price: '0',
     feature: [
       '50 Payload outputs for AI blocks AI output with watermark',
       'Unlimited flows',
@@ -33,7 +33,7 @@ const data: PlanType[] = [
     title: 'Startup',
     subTitle:
       'For small teams who want to start using Deep learning AI to integrate with business process',
-    price: '599.00',
+    price: '599',
     feature: [
       'Unlimited Payload outputs for AI blocks',
       'Unlimited flows',
@@ -44,7 +44,7 @@ const data: PlanType[] = [
   {
     title: 'Professional',
     subTitle: 'Most Popular',
-    price: '4199.00',
+    price: '4199',
     feature: [
       'Unlimited Payload outputs for AI blocks',
       'Unlimited flows',
@@ -55,8 +55,8 @@ const data: PlanType[] = [
   },
   {
     title: 'Enterprises',
-    subTitle: 'Blablabla',
-    price: 'App contact us',
+    subTitle: 'Lorem',
+    price: 'Contact us',
     feature: [
       'Unlimited Payload outputs for AI blocks',
       'Unlimited flows',
@@ -106,7 +106,7 @@ const Plan = (props: Props) => {
         <p>Yearly</p>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#FFFFFF] shadow-2xl rounded-lg divide-[#CDCDCD] divide-x-2">
+      <div className="grid grid-cols-3 bg-[#FFFFFF] shadow-md rounded-lg divide-[#CDCDCD] divide-x-2">
         <div className="flex flex-col col-span-2 gap-y-4 p-8">
           <h1 className="text-20">Choosing a pricing plan:</h1>
           <div className="grid grid-cols-4 border border-[#A1A1A1] text-center h-[55px] divide-[#A1A1A1] divide-x-2 rounded-lg">
@@ -131,7 +131,7 @@ const Plan = (props: Props) => {
               <div
                 key={item.title}
                 className={`${
-                  item.title === choose ? '' : 'hidden'
+                  item.title !== choose && 'hidden'
                 } flex flex-col gap-6`}
               >
                 <div className="flex flex-col gap-y-2">
@@ -164,15 +164,24 @@ const Plan = (props: Props) => {
             <div
               key={item.title}
               className={`${
-                item.title === choose ? '' : 'hidden'
+                item.title !== choose && 'hidden'
               } flex flex-col gap-y-4`}
             >
               <p className="text-lg">{item.title} (Web only)</p>
               <div>
-                <p className="text-[#646464]">Start at</p>
+                <p
+                  className={`${
+                    item.title === 'Enterprises' && 'hidden'
+                  } text-[#646464]`}
+                >
+                  Start at
+                </p>
                 {item.title !== 'Enterprises' ? (
                   <p className="text-3xl font-bold">
-                    {check ? parseFloat(item.price) * 0.9 : item.price} ฿/month
+                    {check
+                      ? Math.round(parseInt(item.price) * 0.9)
+                      : item.price}
+                    ฿/month
                   </p>
                 ) : (
                   <p className="text-3xl font-bold">{item.price}</p>
@@ -183,7 +192,9 @@ const Plan = (props: Props) => {
                   setStep('payment method');
                   setPlan(item);
                 }}
-                className="w-full py-3 text-md bg-[#FFB800] text-[#FFFFFF] border border-[#FFB800] hover:bg-[#FFFFFF] hover:text-[#FFB800] transition-all rounded-md"
+                className={`${
+                  item.title === 'Enterprises' && 'hidden'
+                } w-full py-3 text-md bg-[#FFB800] text-[#FFFFFF] border border-[#FFB800] hover:bg-[#FFFFFF] hover:text-[#FFB800] transition-all rounded-md`}
               >
                 Choose now
               </button>

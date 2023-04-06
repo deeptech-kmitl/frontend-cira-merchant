@@ -142,18 +142,57 @@ const CompletePayment = (props: Props) => {
                 . You can cancel recurring payments at any time.
               </div>
             </div>
+            <div className="flex flex-col space-y-2 pt-4 text-[#32332E] font-medium">
+              <p>{paymentInfo.plan}</p>
+              <p>
+                {user.name} - {paymentInfo.country}
+              </p>
+              <div className="flex justify-between pt-10 font-medium">
+                <p>Taxes & Fees</p>
+                <p>฿ 0.00</p>
+              </div>
+            </div>
+            <div className="flex justify-between pb-16 pt-2">
+              <p className="font-semibold text-2xl">Total</p>
+              <p className="font-medium text-xl">฿ {paymentInfo.price}</p>
+            </div>
+            <div className="flex flex-col py-6 gap-y-4">
+              <p className="text-center text-[#8C939D]">
+                Encrypted and Secure Payments
+              </p>
+              <div className="px-10">
+                By checking out you agree with our{' '}
+                <Link
+                  href=""
+                  className="text-primary-1 font-semibold underline"
+                >
+                  Terms of Service
+                </Link>
+                . We will process your personal data for the fulfillment of your
+                order and other purposes as per our{' '}
+                <Link
+                  href=""
+                  className="text-primary-1 font-semibold underline"
+                >
+                  Privacy Policy
+                </Link>
+                . You can cancel recurring payments at any time.
+              </div>
+            </div>
           </div>
+          {paymentStatus === 'Pending' && (
+            <PrimaryButton action={() => setPaymentStatus('Success')}>
+              <p>Complete Payment</p>
+            </PrimaryButton>
+          )}
+          {paymentStatus === 'Success' && (
+            <PrimaryButton
+              action={() => router.push('/subscription/dashboard')}
+            >
+              <p>Back to Dashboard</p>
+            </PrimaryButton>
+          )}
         </div>
-        {paymentStatus === 'Pending' && (
-          <PrimaryButton action={() => setPaymentStatus('Success')}>
-            <p>Complete Payment</p>
-          </PrimaryButton>
-        )}
-        {paymentStatus === 'Success' && (
-          <PrimaryButton action={() => router.push('/subscription/dashboard')}>
-            <p>Back to Dashboard</p>
-          </PrimaryButton>
-        )}
       </div>
     </div>
   );

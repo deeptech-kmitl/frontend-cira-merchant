@@ -45,9 +45,16 @@ const Signin = () => {
     <div className="flex justify-center gap-12 min-h-screen items-center">
       <div className="p-3 w-full max-w-[800px] lg:p-12 gap-10 max-h-[847px] flex flex-col items-center shadow-lg mb-6">
         <div className="flex flex-col justify-start w-full">
-          <Link href={'/'}>
-            <Image src="/images/cira_logo.png" alt="" width={234} height={92} />
-          </Link>
+          <div className="w-[234px]">
+            <Link href={'/'}>
+              <Image
+                src="/images/cira_logo.png"
+                alt=""
+                width={234}
+                height={92}
+              />
+            </Link>
+          </div>
 
           <h1 className="text-2xl font-semibold">Welcome back</h1>
         </div>
@@ -56,7 +63,7 @@ const Signin = () => {
           type="button"
           className="flex gap-4 items-center justify-center border border-[#EDEAEA] rounded-md text-black bg-[#FFFFFF] text-[24px] hover:border-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
           onClick={() => {
-            router.push('http://localhost:3333/v1/google');
+            router.push('http://localhost:3333/v1/auth/google');
           }}
         >
           <GmailLogo />
@@ -123,7 +130,7 @@ const Signin = () => {
             </div>
             <div className="flex justify-end">
               <Link
-                href="/subscription/forgot-password"
+                href="/forgot-password"
                 className="relative w-auto hidden lg:block text-[#D48A3A]"
               >
                 <h1>Forgot Password ?</h1>
@@ -149,7 +156,7 @@ const Signin = () => {
           </button>
           <p className="text-[#8C939D]">
             Don&apos;t have an account?{' '}
-            <Link className="text-[#D48A3A]" href={'/'}>
+            <Link className="text-[#D48A3A]" href={'/signup'}>
               Sign up
             </Link>
           </p>
