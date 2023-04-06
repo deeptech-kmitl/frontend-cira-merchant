@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import 'yup-phone';
 import { CardFrame, FloatButton } from '.';
 
-const SignUp = () => {
+const Signup = () => {
   const URL = process.env.BACKEND_URL;
   const router = useRouter();
 
@@ -392,4 +392,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;
