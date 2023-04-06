@@ -63,7 +63,7 @@ const Signin = () => {
           type="button"
           className="flex gap-4 items-center justify-center border border-[#EDEAEA] rounded-md text-black bg-[#FFFFFF] text-[24px] hover:border-blue-500/40 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium text-sm w-full py-2.5 dark:focus:ring-[#4285F4]/55"
           onClick={() => {
-            router.push('http://localhost:3333/v1/google');
+            router.push('http://localhost:3333/v1/auth/google');
           }}
         >
           <GmailLogo />
@@ -156,7 +156,7 @@ const Signin = () => {
           </button>
           <p className="text-[#8C939D]">
             Don&apos;t have an account?{' '}
-            <Link className="text-[#D48A3A]" href={'/'}>
+            <Link className="text-[#D48A3A]" href={'/signup'}>
               Sign up
             </Link>
           </p>
