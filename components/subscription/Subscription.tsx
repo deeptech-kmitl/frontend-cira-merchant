@@ -9,15 +9,38 @@ export type PaymentStep =
   | 'payment method'
   | 'complete payment';
 
+export interface PaymentData {
+  platform: string;
+  price: string | undefined;
+  plan: string;
+  country: string;
+}
+
 interface Component {
   title: string;
   component: React.ReactNode;
   prompt: PaymentStep;
 }
 
-const Subscription = () => {
+interface User {
+  name: string;
+}
+
+interface Props {
+  user: User;
+}
+
+const Subscription = (props: Props) => {
+  const { user } = props;
   const [step, setStep] = useState<PaymentStep>('choosing plan');
+  const [check, setCheck] = useState(false);
   const [plan, setPlan] = useState<PlanType>();
+  const [paymentData, SetPaymentData] = useState<PaymentData>({
+    platform: '',
+    price: '',
+    plan: '',
+    country: '',
+  });
 
   const prevStep = (current: PaymentStep) => {
     current === 'payment method'
@@ -30,17 +53,33 @@ const Subscription = () => {
   const PaymentComponents: Component[] = [
     {
       title: 'Designed for business teams like yours',
-      component: <Plan step={step} setStep={setStep} setPlan={setPlan} />,
+      component: (
+        <Plan
+          step={step}
+          setStep={setStep}
+          setPlan={setPlan}
+          check={check}
+          setCheck={setCheck}
+        />
+      ),
       prompt: 'choosing plan',
     },
     {
       title: 'Select payment method',
-      component: <Payment step={step} setStep={setStep} plan={plan} />,
+      component: (
+        <Payment
+          setStep={setStep}
+          plan={plan}
+          yearly={check}
+          paymentData={paymentData}
+          setPaymentData={SetPaymentData}
+        />
+      ),
       prompt: 'payment method',
     },
     {
       title: 'Pay with promptpay',
-      component: <CompletePayment />,
+      component: <CompletePayment user={user} paymentInfo={paymentData} />,
       prompt: 'complete payment',
     },
   ];

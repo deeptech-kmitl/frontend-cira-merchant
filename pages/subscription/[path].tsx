@@ -35,7 +35,7 @@ const TabComponents: Components[] = [
   },
   {
     path: 'subscription',
-    component: <Subscription />,
+    component: <Subscription user={Account} />,
   },
   {
     path: 'settings',

@@ -1,9 +1,10 @@
 import { Country } from '@/data/country';
 import Image from 'next/image';
+import { SetStateAction, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
 import FloatButton from '../shared/FloatButton';
 import { PlanType } from './Plan';
-import { PaymentStep } from './Subscription';
+import { PaymentData, PaymentStep } from './Subscription';
 
 interface Banking {
   value: string;
@@ -16,44 +17,67 @@ interface Countries {
 }
 
 interface Props {
-  step: PaymentStep;
   setStep: (step: PaymentStep) => void;
+  paymentData: PaymentData;
+  setPaymentData: (paymentData: PaymentData) => void;
   plan?: PlanType;
+  yearly: boolean;
 }
 
 const paymentBanking: Banking[] = [
   {
-    value: 'truemoney',
+    value: 'True Money',
     image: '/bank/true.png',
   },
   {
-    value: 'kma',
+    value: 'Krungsri Bank',
     image: '/bank/kma.png',
   },
   {
-    value: 'promptpay',
+    value: 'Promptpay',
     image: '/bank/promptpay.png',
   },
   {
-    value: 'ktb',
+    value: 'Krungthai Bank',
     image: '/bank/ktb.png',
   },
   {
-    value: 'scb',
+    value: 'Siam Commercial Bank',
     image: '/bank/scb.png',
   },
   {
-    value: 'kplus',
+    value: 'K Plus',
     image: '/bank/kplus.png',
   },
   {
-    value: 'bangkok',
+    value: 'Bangkok Bank',
     image: '/bank/bangkok.png',
   },
 ];
 
 const Payment = (props: Props) => {
-  const { step, setStep, plan } = props;
+  const { setStep, plan, yearly, paymentData, setPaymentData } = props;
+  const [paymentPlatform, setPaymentPlatform] = useState('Promptpay');
+  const [country, setCountry] = useState('');
+
+  const onOptionsChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setPaymentPlatform(e.target.value);
+  };
+
+  const ConfirmPaymentOptions = () => {
+    setStep('complete payment');
+    setPaymentData({
+      platform: paymentPlatform,
+      price: plan?.price,
+      plan: `${plan?.title} plan - ${
+        yearly ? '12 Months Plan' : '1 Month Plan'
+      }`,
+      country: country,
+    });
+  };
+
   return (
     <div className="w-full flex justify-between space-x-10 pt-10">
       <div className="flex flex-col space-y-4">
@@ -67,6 +91,8 @@ const Payment = (props: Props) => {
               name="bank"
               value={item.value}
               className="border border-"
+              onChange={onOptionsChange}
+              checked={paymentPlatform === item.value}
             />
             <div className="px-5">
               <Image
@@ -83,7 +109,10 @@ const Payment = (props: Props) => {
         <div className="p-6 divide-y divide-[#000]/10 space-y-4">
           <div className="flex flex-col space-y-2">
             <div className="flex justify-between">
-              <p className="font-semibold">{plan?.title} plan - Monthly Plan</p>
+              <p className="font-semibold">
+                {plan?.title} plan -{' '}
+                {yearly ? '12 Months Plan' : '1 Month Plan'}
+              </p>
               <p className="font-medium">฿ {plan?.price}</p>
             </div>
             <div className="flex justify-between">
@@ -101,6 +130,7 @@ const Payment = (props: Props) => {
             <select
               name="country"
               className="border border-[#D2CFCF] bg-[#F9FAFB] rounded-md p-3"
+              onChange={(e) => setCountry(e.target.value)}
             >
               {Country.map((item: Countries, i: number) => (
                 <option value={item.country} key={i}>
@@ -121,7 +151,7 @@ const Payment = (props: Props) => {
             <p className="font-medium text-[#D48A3A]">Have a coupon code?</p>
           </div>
           <div className="pt-28">
-            <FloatButton action={() => setStep('complete payment')}>
+            <FloatButton action={() => ConfirmPaymentOptions()}>
               <p>Submit Secure Payment</p>
             </FloatButton>
           </div>

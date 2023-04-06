@@ -7,6 +7,8 @@ interface Props {
   setStep: (step: PaymentStep) => void;
   plan?: PlanType;
   setPlan: (plan: PlanType) => void;
+  check: boolean;
+  setCheck: (check: boolean) => void;
 }
 
 export interface PlanType {
@@ -67,8 +69,7 @@ const data: PlanType[] = [
 ];
 
 const Plan = (props: Props) => {
-  const { step, setStep, plan, setPlan } = props;
-  const [check, setCheck] = useState(false);
+  const { step, setStep, plan, setPlan, check, setCheck } = props;
   const [choose, setChoose] = useState('Startup');
   const num = 0;
   const checkbox =
