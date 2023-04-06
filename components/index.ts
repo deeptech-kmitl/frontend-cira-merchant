@@ -15,6 +15,7 @@ export { default as FloatButton } from './shared/FloatButton';
 export { default as OutlinedButton } from './shared/OutlinedButton';
 export { default as PrimaryButton } from './shared/PrimaryButton';
 export { default as PrimaryChip } from './shared/PrimaryChip';
+export { default as Signup } from './sign-up';
 export { default as Signin } from './Signin';
 export { default as SignUpWithGoogle } from './SignUpWithGoogle';
 export { default as DashBoard } from './subscription/DashBoard';
