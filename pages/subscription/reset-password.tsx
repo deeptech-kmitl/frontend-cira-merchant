@@ -31,7 +31,7 @@ export default function Reset() {
       }
     });
   };
-  
+
   const checkPassword = (pw: string, cf: string) => {
     if (pw.length > 8 && /[A-Z]/.test(pw)) {
       if (pw.match(cf)) {
