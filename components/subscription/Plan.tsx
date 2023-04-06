@@ -1,13 +1,22 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { PaymentStep } from './Subscription';
 
-interface plan {
+interface Props {
+  step?: PaymentStep;
+  setStep: (step: PaymentStep) => void;
+  plan?: PlanType;
+  setPlan: (plan: PlanType) => void;
+}
+
+export interface PlanType {
   title: string;
   subTitle: string;
   price: string;
   feature: any;
 }
-const data: plan[] = [
+
+const data: PlanType[] = [
   {
     title: 'Education',
     subTitle: 'Blablabla',
@@ -57,12 +66,14 @@ const data: plan[] = [
   },
 ];
 
-const Plan = () => {
+const Plan = (props: Props) => {
+  const { step, setStep, plan, setPlan } = props;
   const [check, setCheck] = useState(false);
   const [choose, setChoose] = useState('Startup');
   const num = 0;
   const checkbox =
     (document.getElementById('myCheck') as HTMLInputElement) || null;
+
   return (
     <div className="flex flex-col gap-y-6">
       <div className="flex items-center justify-end">
@@ -98,7 +109,7 @@ const Plan = () => {
         <div className="flex flex-col col-span-2 gap-y-4 p-8">
           <h1 className="text-20">Choosing a pricing plan:</h1>
           <div className="grid grid-cols-4 border border-[#A1A1A1] text-center h-[55px] divide-[#A1A1A1] divide-x-2 rounded-lg">
-            {data.map((item: plan, i: number) => (
+            {data.map((item: PlanType, i: number) => (
               <div
                 key={i}
                 className={`h-full flex items-center justify-center ${
@@ -115,7 +126,7 @@ const Plan = () => {
             ))}
           </div>
           <div>
-            {data.map((item: plan) => (
+            {data.map((item: PlanType) => (
               <div
                 key={item.title}
                 className={`${
@@ -148,7 +159,7 @@ const Plan = () => {
           </div>
         </div>
         <div className="p-8">
-          {data.map((item: plan) => (
+          {data.map((item: PlanType) => (
             <div
               key={item.title}
               className={`${
@@ -166,7 +177,13 @@ const Plan = () => {
                   <p className="text-3xl font-bold">{item.price}</p>
                 )}
               </div>
-              <button className="w-full py-3 text-md bg-[#FFB800] text-[#FFFFFF] border border-[#FFB800] hover:bg-[#FFFFFF] hover:text-[#FFB800] transition-all rounded-md">
+              <button
+                onClick={() => {
+                  setStep('payment method');
+                  setPlan(item);
+                }}
+                className="w-full py-3 text-md bg-[#FFB800] text-[#FFFFFF] border border-[#FFB800] hover:bg-[#FFFFFF] hover:text-[#FFB800] transition-all rounded-md"
+              >
                 Choose now
               </button>
               <div className="flex flex-col gap-y-2">

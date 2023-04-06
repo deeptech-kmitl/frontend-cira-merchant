@@ -1,8 +1,9 @@
 import { Country } from '@/data/country';
 import Image from 'next/image';
-import Link from 'next/link';
 import { BsCheck } from 'react-icons/bs';
 import FloatButton from '../shared/FloatButton';
+import { PlanType } from './Plan';
+import { PaymentStep } from './Subscription';
 
 interface Banking {
   value: string;
@@ -12,6 +13,12 @@ interface Banking {
 interface Countries {
   country: string;
   code: string;
+}
+
+interface Props {
+  step: PaymentStep;
+  setStep: (step: PaymentStep) => void;
+  plan?: PlanType;
 }
 
 const paymentBanking: Banking[] = [
@@ -45,9 +52,10 @@ const paymentBanking: Banking[] = [
   },
 ];
 
-const Payment = () => {
+const Payment = (props: Props) => {
+  const { step, setStep, plan } = props;
   return (
-    <div className="w-full flex justify-between space-x-10">
+    <div className="w-full flex justify-between space-x-10 pt-10">
       <div className="flex flex-col space-y-4">
         {paymentBanking.map((item: Banking, i: number) => (
           <div
@@ -75,8 +83,8 @@ const Payment = () => {
         <div className="p-6 divide-y divide-[#000]/10 space-y-4">
           <div className="flex flex-col space-y-2">
             <div className="flex justify-between">
-              <p className="font-semibold">Professional plan - 24 Month Plan</p>
-              <p className="font-medium">฿ 412.83</p>
+              <p className="font-semibold">{plan?.title} plan - Monthly Plan</p>
+              <p className="font-medium">฿ {plan?.price}</p>
             </div>
             <div className="flex justify-between">
               <div className="flex items-center text-[#404D54] font-medium">
@@ -85,7 +93,7 @@ const Payment = () => {
                 </div>
                 Setup
               </div>
-              <p className="font-medium">฿ 42.83</p>
+              <p className="font-medium">฿ {plan?.price}</p>
             </div>
           </div>
           <div className="flex flex-col space-y-4 pt-4">
@@ -108,31 +116,15 @@ const Payment = () => {
           <div className="flex flex-col space-y-4 pt-4">
             <div className="flex justify-between">
               <p className="font-semibold text-xl">Total</p>
-              <p className="font-medium text-xl">฿ 454.83</p>
+              <p className="font-medium text-xl">฿ {plan?.price}</p>
             </div>
             <p className="font-medium text-[#D48A3A]">Have a coupon code?</p>
           </div>
           <div className="pt-28">
-            <FloatButton>
+            <FloatButton action={() => setStep('complete payment')}>
               <p>Submit Secure Payment</p>
             </FloatButton>
           </div>
-          <div className="flex flex-col border-[#000000]/10 border-b-2">
-            <div className="p-4 flex flex-col gap-y-2">
-              <div className="flex justify-between">
-                <h1 className="text-[#32332E] text-3xl">Total</h1>
-                <p className="text-[#32332E] text-2xl">฿ 455.66</p>
-              </div>
-              <Link className="text-[#D48A3A]" href={''}>
-                Have a coupon code?
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="m-6">
-          <button className="w-full transition-all ease-in-out p-3 bg-[#FCB040] text-[#FFFFFF] hover:text-[#FCB040] hover:bg-[#FFFFFF] border-[#FCB040] border-2 rounded-lg">
-            Submit Secure Payment
-          </button>
         </div>
       </div>
     </div>

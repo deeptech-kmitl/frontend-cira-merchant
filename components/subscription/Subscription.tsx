@@ -2,38 +2,24 @@ import { useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import CompletePayment from './CompletePayment';
 import Payment from './Payment';
-import Plan from './Plan';
+import Plan, { PlanType } from './Plan';
 
-type Step = 'choosing plan' | 'payment method' | 'complete payment';
+export type PaymentStep =
+  | 'choosing plan'
+  | 'payment method'
+  | 'complete payment';
 
 interface Component {
   title: string;
   component: React.ReactNode;
-  prompt: Step;
+  prompt: PaymentStep;
 }
 
-const PaymentComponents: Component[] = [
-  {
-    title: 'Designed for business teams like yours',
-    component: <Plan />,
-    prompt: 'choosing plan',
-  },
-  {
-    title: 'Select payment method',
-    component: <Payment />,
-    prompt: 'payment method',
-  },
-  {
-    title: 'Pay with promptpay',
-    component: <CompletePayment />,
-    prompt: 'complete payment',
-  },
-];
-
 const Subscription = () => {
-  const [step, setStep] = useState<Step>('choosing plan');
+  const [step, setStep] = useState<PaymentStep>('choosing plan');
+  const [plan, setPlan] = useState<PlanType>();
 
-  const prevStep = (current: Step) => {
+  const prevStep = (current: PaymentStep) => {
     current === 'payment method'
       ? setStep('choosing plan')
       : current === 'complete payment'
@@ -41,13 +27,31 @@ const Subscription = () => {
       : '';
   };
 
+  const PaymentComponents: Component[] = [
+    {
+      title: 'Designed for business teams like yours',
+      component: <Plan step={step} setStep={setStep} setPlan={setPlan} />,
+      prompt: 'choosing plan',
+    },
+    {
+      title: 'Select payment method',
+      component: <Payment step={step} setStep={setStep} plan={plan} />,
+      prompt: 'payment method',
+    },
+    {
+      title: 'Pay with promptpay',
+      component: <CompletePayment />,
+      prompt: 'complete payment',
+    },
+  ];
+
   return (
     <div className="w-full h-full flex flex-col divide-y divide-black/10">
       <div className="flex flex-col space-y-2 pb-4">
         <h3 className="text-4xl font-medium">Subscription</h3>
         <p className="text-[#969696]">Choose your best for your company</p>
       </div>
-      <div className="min-h-[70vh] flex flex-col space-y-6">
+      <div className="flex flex-col space-y-6">
         {PaymentComponents.map((item: Component, i: number) => (
           <div key={i}>
             {step === item.prompt && (
