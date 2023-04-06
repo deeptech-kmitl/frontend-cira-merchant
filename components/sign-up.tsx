@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { FloatButton, CardFrame } from '.';
+import { useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useFormik } from 'formik';
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import * as Yup from 'yup';
 import 'yup-phone';
-import toast, { Toaster } from 'react-hot-toast';
+import { CardFrame, FloatButton } from '.';
 
 const SignUp = () => {
   const URL = process.env.BACKEND_URL;
@@ -29,6 +29,7 @@ const SignUp = () => {
       const resSignup = await register.json();
       if (resSignup.message.includes('successfully')) {
         toast.success(resSignup.message);
+        router.push('sign-in');
       } else {
         toast.error(resSignup.message);
       }
