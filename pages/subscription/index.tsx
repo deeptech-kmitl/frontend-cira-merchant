@@ -1,4 +1,5 @@
 import { DashBoard, SideBar, UserBar } from '@/components';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 interface User {
   email: string;
@@ -7,9 +8,14 @@ interface User {
 }
 const SubscriptionPage = () => {
   const [data, setData] = useState<any>(null);
+  const router = useRouter();
   useEffect(() => {
     if (window !== undefined) {
-      setData(JSON.parse(localStorage.getItem('UserToken') || ''));
+      if (localStorage.getItem('UserToken') === null) {
+        router.push('/sign-in');
+      } else {
+        setData(JSON.parse(localStorage.getItem('UserToken') || ''));
+      }
     }
   }, []);
   let Account: User | null = null;

@@ -25,7 +25,11 @@ const SubscriptionMod = () => {
   const [data, setData] = useState<any>(null);
   useEffect(() => {
     if (window !== undefined) {
-      setData(JSON.parse(localStorage.getItem('UserToken') || ''));
+      if (localStorage.getItem('UserToken') === null) {
+        router.push('/sign-in');
+      } else {
+        setData(JSON.parse(localStorage.getItem('UserToken') || ''));
+      }
     }
   }, []);
   let Account: User | null = null;
