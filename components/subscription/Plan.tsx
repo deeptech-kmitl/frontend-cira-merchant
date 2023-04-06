@@ -106,7 +106,7 @@ const Plan = (props: Props) => {
         <p>Yearly</p>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#FFFFFF] shadow-2xl rounded-lg divide-[#CDCDCD] divide-x-2">
+      <div className="grid grid-cols-3 bg-[#FFFFFF] shadow-md rounded-lg divide-[#CDCDCD] divide-x-2">
         <div className="flex flex-col col-span-2 gap-y-4 p-8">
           <h1 className="text-20">Choosing a pricing plan:</h1>
           <div className="grid grid-cols-4 border border-[#A1A1A1] text-center h-[55px] divide-[#A1A1A1] divide-x-2 rounded-lg">
