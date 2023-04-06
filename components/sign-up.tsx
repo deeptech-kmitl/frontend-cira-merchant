@@ -12,6 +12,11 @@ const SignUp = () => {
   const URL = process.env.BACKEND_URL;
   const router = useRouter();
 
+  const [clickEmail, setClickEmail] = useState(false);
+  const [clickFullname, setClickFullname] = useState(false);
+  const [clickPhone, setClickPhone] = useState(false);
+  const [clickUsername, setClickUsername] = useState(false);
+
   async function createAccount(values: any) {
     try {
       const register = await fetch(`${URL}/v1/auth/signup`, {
@@ -52,7 +57,8 @@ const SignUp = () => {
         '* Phone is not valid'
       )
       .required('* Phone is a required field')
-      .max(10, 'too long'),
+      .max(10, 'too long')
+      .min(10, 'too short'),
     username: Yup.string().required('* Username is a required field'),
     password: Yup.string()
       .min(8, '* You need to be older than 8 to register')
@@ -153,17 +159,22 @@ const SignUp = () => {
                     }`}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    onClick={() => setClickEmail(true)}
                     value={formik.values.email}
                   />
-                  {(formik.errors.email || formik.errors.fullName) && (
-                    <p>
-                      <span className="text-white">.</span>
-                      {formik.touched.email && (
-                        <span className="text-red-400">
-                          {formik.errors.email}
-                        </span>
+                  {(clickEmail || clickFullname) && (
+                    <>
+                      {(formik.errors.email || formik.errors.fullName) && (
+                        <p>
+                          <span className="text-white">.</span>
+                          {formik.touched.email && (
+                            <span className="text-red-400">
+                              {formik.errors.email}
+                            </span>
+                          )}
+                        </p>
                       )}
-                    </p>
+                    </>
                   )}
                 </div>
                 <div className="grid">
@@ -181,16 +192,21 @@ const SignUp = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.fullName}
+                    onClick={() => setClickFullname(true)}
                   />
-                  {(formik.errors.email || formik.errors.fullName) && (
-                    <p>
-                      <span className="text-white">.</span>
-                      {formik.touched.fullName && (
-                        <span className="text-red-400">
-                          {formik.errors.fullName}
-                        </span>
+                  {(clickEmail || clickFullname) && (
+                    <>
+                      {(formik.errors.email || formik.errors.fullName) && (
+                        <p>
+                          <span className="text-white">.</span>
+                          {formik.touched.fullName && (
+                            <span className="text-red-400">
+                              {formik.errors.fullName}
+                            </span>
+                          )}
+                        </p>
                       )}
-                    </p>
+                    </>
                   )}
                 </div>
               </div>
@@ -211,16 +227,21 @@ const SignUp = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.phone}
+                    onClick={() => setClickPhone(true)}
                   />
-                  {(formik.errors.phone || formik.errors.username) && (
-                    <p>
-                      <span className="text-white">.</span>
-                      {formik.touched.phone && (
-                        <span className="text-red-400">
-                          {formik.errors.phone}
-                        </span>
+                  {(clickPhone || clickUsername) && (
+                    <>
+                      {(formik.errors.phone || formik.errors.username) && (
+                        <p>
+                          <span className="text-white">.</span>
+                          {formik.touched.phone && (
+                            <span className="text-red-400">
+                              {formik.errors.phone}
+                            </span>
+                          )}
+                        </p>
                       )}
-                    </p>
+                    </>
                   )}
                 </div>
                 <div className="grid">
@@ -238,16 +259,21 @@ const SignUp = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.username}
+                    onClick={() => setClickUsername(true)}
                   />
-                  {(formik.errors.phone || formik.errors.username) && (
-                    <p>
-                      <span className="text-white">.</span>
-                      {formik.touched.username && (
-                        <span className="text-red-400">
-                          {formik.errors.username}
-                        </span>
+                  {(clickPhone || clickUsername) && (
+                    <>
+                      {(formik.errors.phone || formik.errors.username) && (
+                        <p>
+                          <span className="text-white">.</span>
+                          {formik.touched.username && (
+                            <span className="text-red-400">
+                              {formik.errors.username}
+                            </span>
+                          )}
+                        </p>
                       )}
-                    </p>
+                    </>
                   )}
                 </div>
               </div>
