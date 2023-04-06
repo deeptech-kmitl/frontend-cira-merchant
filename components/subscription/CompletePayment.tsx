@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
-import FloatButton from '../shared/FloatButton';
 import { PaymentData } from './Subscription';
 
 type PaymentStatus = 'Pending' | 'Success' | 'Failed';
@@ -53,23 +53,36 @@ const CompletePayment = (props: Props) => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col space-y-2 pt-4 text-[#32332E]">
-            <p className="font-medium">{paymentInfo.plan}</p>
-            <p className="font-medium">
+          <div className="flex flex-col space-y-2 pt-4 text-[#32332E] font-medium">
+            <p>{paymentInfo.plan}</p>
+            <p>
               {user.name} - {paymentInfo.country}
             </p>
-          </div>
-          <div className="flex flex-col space-y-4 pt-4">
-            <div className="flex justify-between">
-              <p className="font-semibold text-xl">Total</p>
-              <p className="font-medium text-xl">฿ {paymentInfo.price}</p>
+            <div className="flex justify-between pt-10 font-medium">
+              <p>Taxes & Fees</p>
+              <p>฿ 0.00</p>
             </div>
-            <p className="font-medium text-[#D48A3A]">Have a coupon code?</p>
           </div>
-          <div className="pt-28">
-            <FloatButton>
-              <p>Submit Secure Payment</p>
-            </FloatButton>
+          <div className="flex justify-between pb-16 pt-2">
+            <p className="font-semibold text-2xl">Total</p>
+            <p className="font-medium text-xl">฿ {paymentInfo.price}</p>
+          </div>
+          <div className="flex flex-col py-6 gap-y-4">
+            <p className="text-center text-[#8C939D]">
+              Encrypted and Secure Payments
+            </p>
+            <div className="px-10">
+              By checking out you agree with our{' '}
+              <Link href="" className="text-primary-1 font-semibold underline">
+                Terms of Service
+              </Link>
+              . We will process your personal data for the fulfillment of your
+              order and other purposes as per our{' '}
+              <Link href="" className="text-primary-1 font-semibold underline">
+                Privacy Policy
+              </Link>
+              . You can cancel recurring payments at any time.
+            </div>
           </div>
         </div>
       </div>
