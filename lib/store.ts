@@ -1,13 +1,25 @@
 import { createContext, useContext } from 'react';
 import { createStore, useStore as useZustandStore } from 'zustand';
 
-interface StoreInterface {
-  token: string;
-  getToken: (token: string) => void;
+export interface StoreInterface {
+  user: StoreUserAuth | null;
+  setUser: (user: StoreInterface['user']) => void;
+}
+
+export interface StoreUserAuth {
+  id: string;
+  email: string;
+  role: string;
+  name: string;
+  birthDate: string;
+  emailVerified: boolean;
+  phone: string;
+  registrationDate: string;
+  username: string;
 }
 
 const getDefaultInitialState = () => ({
-  token: '',
+  user: null,
 });
 
 export type StoreType = ReturnType<typeof initializeStore>;
@@ -30,9 +42,9 @@ export const initializeStore = (
   return createStore<StoreInterface>((set, get) => ({
     ...getDefaultInitialState(),
     ...preloadedState,
-    getToken: (token: string) => {
+    setUser: (user: StoreUserAuth | null) => {
       set({
-        token,
+        user,
       });
     },
   }));
