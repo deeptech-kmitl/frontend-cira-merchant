@@ -13,8 +13,8 @@ interface Banking {
 }
 
 interface Countries {
-  country: string;
-  code: string;
+  Name: string;
+  Code: string;
 }
 
 interface Props {
@@ -118,7 +118,7 @@ const Payment = (props: Props) => {
       <div className="w-2/6 flex flex-col space-y-4">
         {paymentBanking.map((item: Banking, i: number) => (
           <div
-            className="flex space-x-4 justify-center items-center py-4 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md"
+            className="flex space-x-4 justify-center items-center h-24 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md"
             key={i}
           >
             <input
@@ -148,7 +148,14 @@ const Payment = (props: Props) => {
                 {plan?.title} plan -{' '}
                 {yearly ? '12 Months Plan' : '1 Month Plan'}
               </p>
-              <p className="font-medium">฿ {plan?.price}</p>
+              <p className="font-medium">
+                ฿{' '}
+                {plan
+                  ? yearly
+                    ? Math.round(parseInt(plan?.price) * 0.9)
+                    : plan?.price
+                  : ''}
+              </p>
             </div>
             <div className="flex justify-between">
               <div className="flex items-center text-[#404D54] font-medium">
@@ -157,7 +164,14 @@ const Payment = (props: Props) => {
                 </div>
                 Setup
               </div>
-              <p className="font-medium">฿ {plan?.price}</p>
+              <p className="font-medium">
+                ฿{' '}
+                {plan
+                  ? yearly
+                    ? Math.round(parseInt(plan?.price) * 0.9)
+                    : plan?.price
+                  : ''}
+              </p>
             </div>
           </div>
           <div className="flex flex-col space-y-4 pt-4">
@@ -168,8 +182,12 @@ const Payment = (props: Props) => {
               onChange={(e) => setCountry(e.target.value)}
             >
               {Country.map((item: Countries, i: number) => (
-                <option value={item.country} key={i}>
-                  {item.country}
+                <option
+                  value={item.Name}
+                  key={i}
+                  selected={item.Name === 'Thailand' ? true : false}
+                >
+                  {item.Name}
                 </option>
               ))}
             </select>
@@ -181,7 +199,14 @@ const Payment = (props: Props) => {
           <div className="flex flex-col space-y-4 pt-4">
             <div className="flex justify-between">
               <p className="font-semibold text-xl">Total</p>
-              <p className="font-medium text-xl">฿ {plan?.price}</p>
+              <p className="font-medium text-xl">
+                ฿{' '}
+                {plan
+                  ? yearly
+                    ? Math.round(parseInt(plan?.price) * 0.9)
+                    : plan?.price
+                  : ''}
+              </p>
             </div>
             <p className="font-medium text-[#D48A3A]">Have a coupon code?</p>
           </div>
