@@ -1,3 +1,4 @@
+import { StoreUserAuth } from '@/lib/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,12 +9,8 @@ import { PaymentData, PaymentResponse } from './Subscription';
 
 type PaymentStatus = 'Pending' | 'Success' | 'Failed';
 
-interface User {
-  name: string;
-}
-
 interface Props {
-  user: User;
+  user: StoreUserAuth | null;
   paymentInfo: PaymentData;
   paymentReq: PaymentResponse;
 }
@@ -113,7 +110,7 @@ const CompletePayment = (props: Props) => {
                 <div className="flex flex-col space-y-2 pt-4 text-[#32332E] font-medium">
                   <p>{paymentInfo.plan}</p>
                   <p>
-                    {user.name} - {paymentInfo.country}
+                    {user?.name} - {paymentInfo.country}
                   </p>
                   <div className="flex justify-between pt-10 font-medium">
                     <p>Taxes & Fees</p>

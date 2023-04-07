@@ -1,31 +1,24 @@
 import { DashBoard, SideBar, UserBar } from '@/components';
+import { useStore } from '@/lib/store';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-interface User {
-  email: string;
-  role: string;
-  name: string;
-}
+import { useEffect } from 'react';
+
+const useAuth = () => {
+  return useStore((store) => ({
+    user: store.user,
+  }));
+};
+
 const SubscriptionPage = () => {
-  const [data, setData] = useState<any>(null);
+  const { user } = useAuth();
   const router = useRouter();
+
   useEffect(() => {
-    if (window !== undefined) {
-      if (localStorage.getItem('UserToken') === null) {
-        router.push('/sign-in');
-      } else {
-        setData(JSON.parse(localStorage.getItem('UserToken') || ''));
-      }
+    if (!user) {
+      router.push('/sign-in');
     }
   }, []);
-  let Account: User | null = null;
-  if (data) {
-    Account = {
-      email: data.data.email,
-      role: data.data.role,
-      name: data.data.username,
-    };
-  }
+
   return (
     <div className="w-full min-h-screen h-full grid grid-cols-12">
       <div className="col-span-2">
@@ -33,8 +26,8 @@ const SubscriptionPage = () => {
       </div>
       <div className="col-span-10 bg-[#F7F7F7]">
         <div className="p-14">
-          {Account && <UserBar user={Account} />}
-          <div className="py-6">{Account && <DashBoard user={Account} />}</div>
+          {user && <UserBar user={user} />}
+          <div className="py-6">{user && <DashBoard user={user} />}</div>
         </div>
       </div>
     </div>

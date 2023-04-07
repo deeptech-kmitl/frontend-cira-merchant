@@ -1,22 +1,18 @@
+import { StoreUserAuth } from '@/lib/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PrimaryButton } from '..';
 
-interface User {
-  name: string;
-}
-
 interface Props {
-  user: User;
+  user: StoreUserAuth | null;
 }
 
-const DashBoard = (props: Props) => {
-  const { user } = props;
+const DashBoard = ({ user }: Props) => {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col space-y-2">
         <h3 className="text-4xl font-medium">Dashboard</h3>
-        <p className="text-[#969696]">Good to see you again, {user.name}</p>
+        <p className="text-[#969696]">Good to see you again, {user?.name}</p>
       </div>
       <div className="min-h-[70vh] flex flex-col space-y-6 justify-center items-center">
         <div className="w-40 h-40 relative">

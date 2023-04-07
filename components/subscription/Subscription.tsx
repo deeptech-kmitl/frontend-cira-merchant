@@ -1,4 +1,4 @@
-import { User } from '@/pages/subscription/[path]';
+import { StoreUserAuth } from '@/lib/store';
 import { useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import CompletePayment from './CompletePayment';
@@ -23,9 +23,9 @@ export interface PaymentPayload {
   type: string;
   customerId: string;
   phone: string;
-  userId: string;
-  email: string;
-  name: string;
+  userId?: string;
+  email?: string;
+  name?: string;
   items: OrderItem;
 }
 
@@ -42,7 +42,7 @@ interface Component {
 }
 
 interface Props {
-  user: User;
+  user: StoreUserAuth | null;
 }
 
 export interface PaymentResponse {
@@ -165,7 +165,7 @@ const Subscription = (props: Props) => {
       title: 'Select payment method',
       component: (
         <Payment
-          user={user}
+          user={user ? user : undefined}
           setStep={setStep}
           plan={plan}
           yearly={check}

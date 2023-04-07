@@ -1,5 +1,5 @@
 import { Country } from '@/data/country';
-import { User } from '@/pages/subscription/[path]';
+import { StoreUserAuth } from '@/lib/store';
 import Image from 'next/image';
 import { SetStateAction, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
@@ -26,7 +26,7 @@ interface Props {
   plan?: PlanType;
   yearly: boolean;
   sendPaymentPayload: () => void;
-  user: User;
+  user?: StoreUserAuth;
 }
 
 const paymentBanking: Banking[] = [
@@ -97,9 +97,9 @@ const Payment = (props: Props) => {
       type: paymentPlatform,
       customerId: 'cust_test_5vd13tlj6f2tdnz49oy',
       phone: '',
-      userId: user.id,
-      email: user.email,
-      name: user.name,
+      userId: user?.id,
+      email: user?.email,
+      name: user?.name,
       items: {
         name: plan ? plan?.title : '',
         amount: Number(plan?.price + '00'),
