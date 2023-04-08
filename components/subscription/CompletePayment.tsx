@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
-import { PrimaryButton } from '..';
+import { LoadingPage, PrimaryButton } from '..';
 import { PaymentData, PaymentResponse } from './Subscription';
 
 type PaymentStatus = 'Pending' | 'Success' | 'Failed';
@@ -162,8 +162,8 @@ const CompletePayment = (props: Props) => {
         </div>
       )}
       {paymentReq.data.paymentId === '' && (
-        <div className="py-4">
-          <p className="text-gray">Loading Payment Request . . .</p>
+        <div className="h-[60vh] w-full justify-center flex items-center">
+          <LoadingPage />
         </div>
       )}
     </>
