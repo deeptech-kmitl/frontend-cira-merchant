@@ -53,13 +53,13 @@ const Signin = () => {
 
         const resp: SignInResponse = await response.json();
         window.localStorage.setItem('token', resp?.access_token);
+        setSpinner(true);
 
         fetch(`${url}/v1/auth`, {
           headers: {
             Authorization: `Bearer ${resp?.access_token}`,
           },
         }).then(async (response) => {
-          setSpinner(true);
           setUser(await response.json());
           router.push('/subscription/dashboard');
         });
