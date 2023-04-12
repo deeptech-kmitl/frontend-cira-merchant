@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import * as Yup from 'yup';
 import 'yup-phone';
@@ -40,46 +40,45 @@ const SignUp = () => {
 
   const validation = Yup.object({
     email: Yup.string()
-      .email('* Invalid email')
-      .required('* Email is a required field'),
+      .required('* Email is a required field.')
+      .test('is-email', '* Email is not valid.', function (value) {
+        return value.includes('@' && '.');
+      }),
     fullName: Yup.string()
-      .required('* Full name is a required field')
-      .test(
-        'is-full-name',
-        '* Please enter both your first and last name',
-        function (value) {
-          const nameArr = value.split(' ');
-          return nameArr.length >= 2;
-        }
-      ),
+      .required('* Full name is a required field.')
+      .test('is-full-name', '* Please enter your last name.', function (value) {
+        const nameArr = value.split(' ');
+        console.log(nameArr);
+        return nameArr.length >= 2 && nameArr[1] != '';
+      }),
     phone: Yup.string()
       .matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        '* Phone is not valid'
+        '* Phone is not valid.'
       )
-      .required('* Phone is a required field')
+      .required('* Phone is a required field.')
       .max(10, 'too long')
-      .min(10, 'too short'),
-    username: Yup.string().required('* Username is a required field'),
+      .min(9, 'too short'),
+    username: Yup.string().required('* Username is a required field.'),
     password: Yup.string()
-      .min(8, '* You need to be older than 8 to register')
-      .required('* Password is a required field')
-      .test('passwords-match', '* Password did not match', function (value) {
+      .min(8, '* You need to be older than 8 to register.')
+      .required('* Password is a required field.')
+      .test('passwords-match', '* Password did not match.', function (value) {
         return this.parent.confirm === value;
       })
       .test(
         'passwords-match',
-        '* Password must contain a minimum of 8 characters with at least one uppercase and one number',
+        '* Password must contain a minimum of 8 characters with at least one uppercase and one number.',
         function (value) {
           return /[A-Z]/.test(value);
         }
       ),
     confirm: Yup.string(),
     toggle: Yup.boolean()
-      .required('Confirm Password is a required field')
+      .required('Confirm Password is a required field.')
       .test(
         'correct',
-        '* You must agree to the Terms of Service',
+        '* You must agree to the Terms of Service.',
         function (value) {
           return value === true;
         }
@@ -136,7 +135,7 @@ const SignUp = () => {
               />
               <span className="font-medium">Sign up with Google</span>
             </button>
-            <div className="relative flex py-5 items-center font-medium">
+            <div className="relative flex py-3 items-center font-medium">
               <div className="grow border-t border-[#a6a5a5]"></div>
               <span className="shrink mx-3 text-[#938f8f] text-xl ">or</span>
               <div className="grow border-t border-[#a6a5a5]"></div>
@@ -147,13 +146,13 @@ const SignUp = () => {
             <div className="grid grid-rows gap-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="grid">
-                  <label className="block mb-2">Your email</label>
+                  <label className="block mb-2 h-8">Your email</label>
                   <input
-                    type="email"
+                    type="text"
                     name="email"
                     id="email"
                     placeholder="email"
-                    className={`block w-full rounded-lg border py-2 px-3 ${
+                    className={`block w-full rounded-lg border py-2 px-3 h-12 ${
                       formik.touched.email && formik.errors.email
                         ? 'border-red-400'
                         : 'border-gray-300'
@@ -163,29 +162,27 @@ const SignUp = () => {
                     onClick={() => setClickEmail(true)}
                     value={formik.values.email}
                   />
-                  {(clickEmail || clickFullname) && (
-                    <>
-                      {(formik.errors.email || formik.errors.fullName) && (
-                        <p>
-                          <span className="text-white">.</span>
-                          {formik.touched.email && (
-                            <span className="text-red-400">
-                              {formik.errors.email}
-                            </span>
-                          )}
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <p className="md:h-2 h-auto">
+                    {((formik.touched.email && formik.errors.email) ||
+                      (formik.touched.fullName && formik.errors.fullName)) && (
+                      <span>
+                        {formik.touched.email && formik.errors.email && (
+                          <span className="text-red-400">
+                            {formik.errors.email}
+                          </span>
+                        )}
+                      </span>
+                    )}
+                  </p>
                 </div>
                 <div className="grid">
-                  <label className="block mb-2">Full name</label>
+                  <label className="block mb-2 h-8">Full name</label>
                   <input
                     type="text"
                     name="fullName"
                     id="fullName"
                     placeholder="name"
-                    className={`block w-full rounded-lg border py-2 px-3 ${
+                    className={`block w-full rounded-lg border py-2 px-3 h-12 ${
                       formik.touched.fullName && formik.errors.fullName
                         ? 'border-red-400'
                         : 'border-gray-300'
@@ -195,32 +192,30 @@ const SignUp = () => {
                     value={formik.values.fullName}
                     onClick={() => setClickFullname(true)}
                   />
-                  {(clickEmail || clickFullname) && (
-                    <>
-                      {(formik.errors.email || formik.errors.fullName) && (
-                        <p>
-                          <span className="text-white">.</span>
-                          {formik.touched.fullName && (
-                            <span className="text-red-400">
-                              {formik.errors.fullName}
-                            </span>
-                          )}
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <p className="md:h-2 h-auto">
+                    {((formik.touched.email && formik.errors.email) ||
+                      (formik.touched.fullName && formik.errors.fullName)) && (
+                      <span>
+                        {formik.touched.fullName && formik.errors.fullName && (
+                          <span className="text-red-400">
+                            {formik.errors.fullName}
+                          </span>
+                        )}
+                      </span>
+                    )}
+                  </p>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="grid">
-                  <label className="block mb-2">Phone number</label>
+                  <label className="block mb-2 h-8">Phone number</label>
                   <input
                     type="text"
                     name="phone"
                     id="phone"
                     placeholder="phone"
                     maxLength={10}
-                    className={`block w-full rounded-lg border py-2 px-3 ${
+                    className={`block w-full rounded-lg border py-2 px-3 h-12 ${
                       formik.touched.phone && formik.errors.phone
                         ? 'border-red-400'
                         : 'border-gray-300'
@@ -230,29 +225,27 @@ const SignUp = () => {
                     value={formik.values.phone}
                     onClick={() => setClickPhone(true)}
                   />
-                  {(clickPhone || clickUsername) && (
-                    <>
-                      {(formik.errors.phone || formik.errors.username) && (
-                        <p>
-                          <span className="text-white">.</span>
-                          {formik.touched.phone && (
-                            <span className="text-red-400">
-                              {formik.errors.phone}
-                            </span>
-                          )}
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <p className="md:h-2 h-auto">
+                    {((formik.touched.phone && formik.errors.phone) ||
+                      (formik.touched.username && formik.errors.username)) && (
+                      <span>
+                        {formik.touched.phone && formik.errors.phone && (
+                          <span className="text-red-400">
+                            {formik.errors.phone}
+                          </span>
+                        )}
+                      </span>
+                    )}
+                  </p>
                 </div>
                 <div className="grid">
-                  <label className="block mb-2">Username</label>
+                  <label className="block mb-2 h-8">Username</label>
                   <input
                     type="text"
                     name="username"
                     id="username"
                     placeholder="username"
-                    className={`block w-full rounded-lg border py-2 px-3 ${
+                    className={`block w-full rounded-lg border py-2 px-3 h-12 ${
                       formik.touched.username && formik.errors.username
                         ? 'border-red-400'
                         : 'border-gray-300'
@@ -262,32 +255,30 @@ const SignUp = () => {
                     value={formik.values.username}
                     onClick={() => setClickUsername(true)}
                   />
-                  {(clickPhone || clickUsername) && (
-                    <>
-                      {(formik.errors.phone || formik.errors.username) && (
-                        <p>
-                          <span className="text-white">.</span>
-                          {formik.touched.username && (
-                            <span className="text-red-400">
-                              {formik.errors.username}
-                            </span>
-                          )}
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <p className="md:h-2 h-auto">
+                    {((formik.touched.phone && formik.errors.phone) ||
+                      (formik.touched.username && formik.errors.username)) && (
+                      <span>
+                        {formik.touched.username && formik.errors.username && (
+                          <span className="text-red-400">
+                            {formik.errors.username}
+                          </span>
+                        )}
+                      </span>
+                    )}
+                  </p>
                 </div>
               </div>
               <div className="grid ">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="grid">
-                    <label className="block mb-2">Password</label>
+                    <label className="block mb-2 h-8">Password</label>
                     <input
                       type="password"
                       name="password"
                       id="password"
                       placeholder="•••••••"
-                      className={`block w-full rounded-lg border py-2 px-3 ${
+                      className={`block w-full rounded-lg border py-2 px-3 h-12 ${
                         formik.touched.password && formik.errors.password
                           ? 'border-red-400'
                           : 'border-gray-300'
@@ -298,13 +289,13 @@ const SignUp = () => {
                     />
                   </div>
                   <div className="grid">
-                    <label className="block mb-2">Confirm Password</label>
+                    <label className="block mb-2 h-8">Confirm Password</label>
                     <input
                       type="password"
                       name="confirm"
                       id="confirm"
                       placeholder="•••••••"
-                      className={`block w-full rounded-lg border py-2 px-3 ${
+                      className={`block w-full rounded-lg border py-2 px-3 h-12 ${
                         formik.touched.password && formik.errors.password
                           ? 'border-red-400'
                           : 'border-gray-300'
@@ -315,9 +306,13 @@ const SignUp = () => {
                     />
                   </div>
                 </div>
-                {formik.touched.password && formik.errors.password && (
-                  <span className="text-red-400">{formik.errors.password}</span>
-                )}
+                <p className="h-auto">
+                  {formik.touched.password && formik.errors.password && (
+                    <span className="text-red-400">
+                      {formik.errors.password}
+                    </span>
+                  )}
+                </p>
               </div>
             </div>
             <div className="lg:hidden">
@@ -368,9 +363,11 @@ const SignUp = () => {
                   </span>
                 </p>
               </div>
-              {formik.touched.toggle && formik.errors.toggle && (
-                <span className="text-red-400">{formik.errors.toggle}</span>
-              )}
+              <p className="md:h-5 h-auto">
+                {formik.touched.toggle && formik.errors.toggle && (
+                  <span className="text-red-400">{formik.errors.toggle}</span>
+                )}
+              </p>
             </div>
             <FloatButton>
               <p className="font-semibold tracking-wide">Create an account</p>
