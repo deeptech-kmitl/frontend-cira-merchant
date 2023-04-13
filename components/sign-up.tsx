@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useRef, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import * as Yup from 'yup';
 import 'yup-phone';
@@ -12,12 +11,13 @@ const SignUp = () => {
   const URL = process.env.BACKEND_URL;
   const router = useRouter();
 
-  const [clickEmail, setClickEmail] = useState(false);
-  const [clickFullname, setClickFullname] = useState(false);
-  const [clickPhone, setClickPhone] = useState(false);
-  const [clickUsername, setClickUsername] = useState(false);
-
-  async function createAccount(values: any) {
+  async function createAccount(values: {
+    email: string;
+    fullName: string;
+    phone: string;
+    username: string;
+    password: string;
+  }) {
     try {
       const register = await fetch(`${URL}/v1/auth/signup`, {
         method: 'POST',
@@ -33,7 +33,7 @@ const SignUp = () => {
       } else {
         toast.error(resSignup.message);
       }
-    } catch (error: any) {
+    } catch (error) {
       toast.error('Incorrect');
     }
   }
@@ -48,17 +48,11 @@ const SignUp = () => {
       .required('* Full name is a required field.')
       .test('is-full-name', '* Please enter your last name.', function (value) {
         const nameArr = value.split(' ');
-        console.log(nameArr);
         return nameArr.length >= 2 && nameArr[1] != '';
       }),
     phone: Yup.string()
-      .matches(
-        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        '* Phone is not valid.'
-      )
-      .required('* Phone is a required field.')
-      .max(10, 'too long')
-      .min(9, 'too short'),
+      .matches(/^\d+$/, '* Phone is not valid.')
+      .required('* Phone is a required field.'),
     username: Yup.string().required('* Username is a required field.'),
     password: Yup.string()
       .min(8, '* You need to be older than 8 to register.')
@@ -159,7 +153,6 @@ const SignUp = () => {
                     }`}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    onClick={() => setClickEmail(true)}
                     value={formik.values.email}
                   />
                   <p className="md:h-2 h-auto">
@@ -190,7 +183,6 @@ const SignUp = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.fullName}
-                    onClick={() => setClickFullname(true)}
                   />
                   <p className="md:h-2 h-auto">
                     {((formik.touched.email && formik.errors.email) ||
@@ -223,7 +215,6 @@ const SignUp = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.phone}
-                    onClick={() => setClickPhone(true)}
                   />
                   <p className="md:h-2 h-auto">
                     {((formik.touched.phone && formik.errors.phone) ||
@@ -253,7 +244,6 @@ const SignUp = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.username}
-                    onClick={() => setClickUsername(true)}
                   />
                   <p className="md:h-2 h-auto">
                     {((formik.touched.phone && formik.errors.phone) ||
