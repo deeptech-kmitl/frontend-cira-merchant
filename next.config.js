@@ -4,6 +4,10 @@ const nextConfig = {
   env: {
     BACKEND_URL: process.env.BACKEND_URL,
   },
+  images: {
+    dangerouslyAllowSVG: true,
+    domains: ['api.omise.co'],
+  },
 };
 
 module.exports = nextConfig;

@@ -1,3 +1,4 @@
+import StoreProvider from '@/lib/StoreProvider';
 import '@/styles/globals.css';
 import { NextSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
@@ -23,7 +24,9 @@ export default function App({ Component, pageProps }: AppProps) {
           siteName: 'CiRA Subscription',
         }}
       />
-      <Component {...pageProps} />
+      <StoreProvider {...pageProps.initialZustandState}>
+        <Component {...pageProps} />
+      </StoreProvider>
     </>
   );
 }
