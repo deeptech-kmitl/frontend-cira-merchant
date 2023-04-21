@@ -21,12 +21,10 @@ module.exports = {
         'dark-brown': '#5F3808',
         'light-brown': '#A77327',
         dark: '#001533',
-        white: '#F4F7FF',
         subtitle: '#697B98',
         highlighter: '#FFE5AB',
-        gray: '#8F9198',
       },
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [require('flowbite/plugin'), require('@tailwindcss/forms')],
 };

@@ -70,10 +70,10 @@ const Signin = () => {
   return (
     <>
       {!spinner && (
-        <div className="flex justify-center gap-12 min-h-screen items-center">
-          <div className="p-3 w-full max-w-[800px] lg:p-12 gap-10 max-h-[847px] flex flex-col items-center shadow-lg mb-6">
+        <div className="flex justify-center min-h-screen items-center">
+          <div className="w-full max-w-[800px] bg-gray-100/50 border-1 lg:p-12 gap-10 max-h-[847px] flex flex-col items-center shadow-sm rounded-lg mb-6">
             <div className="flex flex-col justify-start w-full">
-              <div className="w-[234px]">
+              <div className="w-1/2">
                 <Link href={'/'}>
                   <Image
                     src="/images/cira_logo.png"
@@ -189,14 +189,6 @@ const Signin = () => {
                 </Link>
               </p>
             </div>
-          </div>
-          <div className="hidden 2xl:flex flex-col justify-center">
-            <Image
-              src="/images/cira_logo.png"
-              alt=""
-              width={609}
-              height={242}
-            />
           </div>
         </div>
       )}
