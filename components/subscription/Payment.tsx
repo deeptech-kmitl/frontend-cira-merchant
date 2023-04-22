@@ -13,7 +13,7 @@ interface Banking {
   image: string;
 }
 
-interface Countries {
+export interface Countries {
   Name: string;
   Code: string;
 }
@@ -181,11 +181,7 @@ const Payment = (props: Props) => {
                   onChange={(e) => setCountry(e.target.value)}
                 >
                   {Country.map((item: Countries, i: number) => (
-                    <option
-                      value={item.Name}
-                      key={i}
-                      selected={item.Name === 'Thailand' ? true : false}
-                    >
+                    <option value={item.Name} key={i}>
                       {item.Name}
                     </option>
                   ))}
