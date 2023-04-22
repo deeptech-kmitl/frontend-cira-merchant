@@ -50,7 +50,7 @@ const SubscriptionMod = () => {
     },
     {
       path: 'settings',
-      component: <Settings />,
+      component: <Settings user={user} />,
     },
   ];
 
@@ -64,11 +64,11 @@ const SubscriptionMod = () => {
   });
 
   return (
-    <div className="w-full min-h-screen h-full grid grid-cols-12">
-      <div className="col-span-2">
+    <div className="w-full h-screen grid grid-cols-12">
+      <div className="col-span-2 overflow-hidden">
         <SideBar />
       </div>
-      <div className="col-span-10 bg-[#F7F7F7]">
+      <div className="col-span-10 bg-[#F7F7F7]  overflow-y-scroll">
         <div className="p-14">
           {user && <UserBar user={user} />}
           <div className="py-6">
