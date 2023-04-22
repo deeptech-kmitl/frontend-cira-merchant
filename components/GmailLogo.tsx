@@ -1,4 +1,4 @@
-const GmailLoggo = () => {
+const GmailLogo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,4 +26,4 @@ const GmailLoggo = () => {
   );
 };
 
-export default GmailLoggo;
+export default GmailLogo;
