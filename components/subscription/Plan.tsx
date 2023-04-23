@@ -1,7 +1,7 @@
+import { Switch } from '@headlessui/react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { PaymentStep } from './Subscription';
-
 interface Props {
   step?: PaymentStep;
   setStep: (step: PaymentStep) => void;
@@ -71,45 +71,35 @@ const data: PlanType[] = [
 const Plan = (props: Props) => {
   const { step, setStep, plan, setPlan, check, setCheck } = props;
   const [choose, setChoose] = useState('Startup');
-  const num = 0;
-  const checkbox =
-    (document.getElementById('myCheck') as HTMLInputElement) || null;
-
+  const [enabled, setEnabled] = useState(false)
   return (
     <div className="flex flex-col gap-y-6">
-      <div className="flex items-center justify-end">
+      
+      <div className="flex items-center justify-end gap-x-2">
         <p>Monthly</p>
-        <div
-          className="flex items-center px-4 cursor-pointer rounded-2xl"
-          onClick={() => {
-            setCheck(!check);
-            if (checkbox != null) {
-              checkbox.checked = !check;
-            }
-          }}
-        >
-          <input
-            type="checkbox"
-            id="myCheck"
-            className={`${
-              check ? 'translate-x-12' : num != 0 ? '-translate-x-12' : ''
-            } ml-[3px] p-4 absolute transition-all cursor-pointer rounded-2xl checked:bg-[#FCB040] bg-[#FCB040] focus:ring-0 border-0`}
-          />
-          <span>
-            <div
-              className={`${
-                check ? 'bg-[#FCB040]/20' : 'bg-[#FFFFFF]'
-              } px-11 py-5 rounded-2xl`}
-            ></div>
-          </span>
-        </div>
+        <Switch
+        checked={enabled}
+        onChange={setEnabled}
+        onClick={() => {
+          setCheck(!check);
+        }}
+        className={`${enabled ? 'bg-[#FCB040]/40' : 'bg-[#FFFFFF]'}
+          relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+      >
+        <span className="sr-only">Use setting</span>
+        <span
+          aria-hidden="true"
+          className={`${enabled ? 'translate-x-9' : 'translate-x-0'}
+            pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-[#FCB040] shadow-lg ring-0 transition duration-200 ease-in-out`}
+        />
+      </Switch>
         <p>Yearly</p>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#FFFFFF] shadow-md rounded-lg divide-[#CDCDCD] divide-x-2">
+      <div className="grid min-[900px]:grid-cols-3 bg-[#FFFFFF] shadow-md rounded-lg divide-[#CDCDCD] max-[900px]:divide-y-2 min-[900px]:divide-x-2">
         <div className="flex flex-col col-span-2 gap-y-4 p-8">
           <h1 className="text-20">Choosing a pricing plan:</h1>
-          <div className="grid grid-cols-4 border border-[#A1A1A1] text-center h-[55px] divide-[#A1A1A1] divide-x-2 rounded-lg">
+          <div className="grid max-[900px]:grid-rows-4 min-[900px]:grid-cols-4 border border-[#A1A1A1] text-center max-[900px]:h-[200px] min-[900px]:h-[55px] divide-[#A1A1A1] max-[900px]:divide-y-2 min-[900px]:divide-x-2 rounded-lg">
             {data.map((item: PlanType, i: number) => (
               <div
                 key={i}
@@ -122,7 +112,7 @@ const Plan = (props: Props) => {
                   setChoose(item.title);
                 }}
               >
-                <p>{item.title}</p>
+                <p className='text-sm lg:text-md xl:text-lg'>{item.title}</p>
               </div>
             ))}
           </div>
@@ -159,7 +149,7 @@ const Plan = (props: Props) => {
             ))}
           </div>
         </div>
-        <div className="p-8">
+        <div className="flex max-[900px]:flex-col max-[900px]:col-span-2 p-8">
           {data.map((item: PlanType) => (
             <div
               key={item.title}
@@ -171,16 +161,17 @@ const Plan = (props: Props) => {
               <div>
                 <p
                   className={`${
-                    item.title === 'Enterprises' && 'hidden'
+                    item.title === 'Enterprise' && 'hidden'
                   } text-[#646464]`}
                 >
                   Start at
                 </p>
-                {item.title !== 'Enterprises' ? (
+                {item.title !== 'Enterprise' ? (
                   <p className="text-3xl font-bold">
                     {check
                       ? Math.round(parseInt(item.price) * 0.9)
                       : item.price}
+                      {}
                     ฿/month
                   </p>
                 ) : (
@@ -193,7 +184,7 @@ const Plan = (props: Props) => {
                   setPlan(item);
                 }}
                 className={`${
-                  item.title === 'Enterprises' && 'hidden'
+                  item.title === 'Enterprise' && 'hidden'
                 } w-full py-3 text-md bg-[#FFB800] text-[#FFFFFF] border border-[#FFB800] hover:bg-[#FFFFFF] hover:text-[#FFB800] transition-all rounded-md`}
               >
                 Choose now

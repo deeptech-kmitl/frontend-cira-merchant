@@ -3,6 +3,7 @@ import { GmailLogo, LoadingPage } from '@/components';
 import { useStore } from '@/lib/store';
 import { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 interface IProps {}
@@ -153,9 +154,9 @@ const signin: NextPage = () => {
             </button>
           </div>
           <div className="mt-6 text-center">
-            <a href="/auth/signup" className="underline">
+            <Link href="/auth/signup" className="underline">
               Sign up for an account
-            </a>
+            </Link>
           </div>
       </div>
     </div>}
