@@ -120,8 +120,8 @@ const Payment = (props: Props) => {
   return (
     <>
       {!spinner && (
-        <div className="w-full flex justify-between space-x-10 pt-10">
-          <div className="w-2/6 flex flex-col space-y-4">
+        <div className="w-full grid grid-cols-1 lg:flex lg:justify-between lg:space-x-10 pt-10 justify-start gap-10 lg:gap-0">
+          <div className="w-full lg:w-2/6 flex flex-col space-y-4">
             {paymentBanking.map((item: Banking, i: number) => (
               <div
                 className="flex space-x-4 justify-center items-center h-24 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md"

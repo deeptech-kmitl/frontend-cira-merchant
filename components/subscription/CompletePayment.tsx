@@ -47,9 +47,9 @@ const CompletePayment = (props: Props) => {
   return (
     <>
       {paymentReq.data.paymentId !== '' && (
-        <div className="w-full h-screen flex space-x-10 pt-10">
-          <div className="w-3/6 flex flex-col gap-y-10">
-            <div className="h-2/3 flex space-x-4 items-center justify-center py-4 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md">
+        <div className="w-full h-screen grid grid-cols-1 lg:flex lg:space-x-10 pt-10">
+          <div className="w-full lg:w-3/6 flex flex-col gap-y-10">
+            <div className="lg:h-2/3 flex space-x-4 items-center justify-center py-4 px-5 bg-[#fff] border border-[#C4C4C4] rounded-md">
               <div className="p-6">
                 {paymentStatus === 'Pending' && (
                   <Image
@@ -60,7 +60,7 @@ const CompletePayment = (props: Props) => {
                   />
                 )}
                 {paymentStatus === 'Success' && (
-                  <div className="flex flex-col items-center w-full">
+                  <div className="flex flex-col items-center w-full pb-14">
                     <BsCheck className="text-[#26C07D] h-48 w-48" />
                     <p className="text-2xl font-semibold">Payment Success</p>
                   </div>
@@ -80,7 +80,7 @@ const CompletePayment = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col items-end gap-y-10">
-            <div className="bg-[#fff] h-2/3 border border-[#C4C4C4] rounded-md w-full">
+            <div className="bg-[#fff] h-auto lg:h-2/3 border border-[#C4C4C4] rounded-md w-full">
               <div className="p-6 divide-y divide-[#000]/10 space-y-4">
                 <div className="flex flex-col space-y-2">
                   <div className="flex justify-between">
@@ -146,18 +146,20 @@ const CompletePayment = (props: Props) => {
                 </div>
               </div>
             </div>
-            {paymentStatus === 'Pending' && (
-              <PrimaryButton action={() => setPaymentStatus('Success')}>
-                <p>Complete Payment</p>
-              </PrimaryButton>
-            )}
-            {paymentStatus === 'Success' && (
-              <PrimaryButton
-                action={() => router.push('/subscription/dashboard')}
-              >
-                <p>Back to Dashboard</p>
-              </PrimaryButton>
-            )}
+            <div className="pb-20">
+              {paymentStatus === 'Pending' && (
+                <PrimaryButton action={() => setPaymentStatus('Success')}>
+                  <p>Complete Payment</p>
+                </PrimaryButton>
+              )}
+              {paymentStatus === 'Success' && (
+                <PrimaryButton
+                  action={() => router.push('/subscription/dashboard')}
+                >
+                  <p>Back to Dashboard</p>
+                </PrimaryButton>
+              )}
+            </div>
           </div>
         </div>
       )}
