@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ImBooks } from 'react-icons/im';
 import { IoMdSettings } from 'react-icons/io';
 import { IoBag } from 'react-icons/io5';
 import { MdSpaceDashboard } from 'react-icons/md';
@@ -47,6 +48,11 @@ const SideNav: Menu[] = [
   {
     title: 'general',
     menu: [
+      {
+        icon: <ImBooks />,
+        title: 'Education',
+        path: 'education-verification',
+      },
       {
         icon: <IoMdSettings />,
         title: 'Settings',
