@@ -10,6 +10,7 @@ interface Props {
 
 const EducationVerify = (props: Props) => {
   const { user } = props;
+  const [role, setRole] = useState('student');
   const [image, setImage] = useState('');
   const fileRef = useRef(null);
 
@@ -19,20 +20,22 @@ const EducationVerify = (props: Props) => {
     return validExtensions.includes(fileExtension);
   };
 
-  const fileChange = (e: any) => {
-    if (e.target.files.length < 1) {
-      return;
-    }
-    const file = e.target.files[0];
-    const MAX_FILE_SIZE = 5 * 1024 * 1024;
-    const checkSize = file.size < MAX_FILE_SIZE;
-    if (isValidFileUploaded(file) && checkSize) {
-      setImage(URL.createObjectURL(file));
-      toast.success('Success fully upload your image');
-    } else if (!checkSize) {
-      toast.error('File must not exceed 5MB large');
-    } else {
-      toast.error('Please upload valid image to verify');
+  const fileChange = (files: FileList | null) => {
+    if (files) {
+      if (files.length < 1) {
+        return;
+      }
+      const file = files[0];
+      const MAX_FILE_SIZE = 5 * 1024 * 1024;
+      const checkSize = file.size < MAX_FILE_SIZE;
+      if (isValidFileUploaded(file) && checkSize) {
+        setImage(URL.createObjectURL(file));
+        toast.success('Success fully upload your image');
+      } else if (!checkSize) {
+        toast.error('File must not exceed 5MB large');
+      } else {
+        toast.error('Please upload valid image to verify');
+      }
     }
   };
 
@@ -49,13 +52,105 @@ const EducationVerify = (props: Props) => {
         <div className="min-h-[70vh] pt-4 flex flex-col space-y-6">
           <div className="bg-[#fff]/50 rounded-md">
             <div className="p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                <div>
+                  <label
+                    htmlFor="university-name"
+                    className="block font-medium leading-7 text-gray-900"
+                  >
+                    University&apos;s name
+                  </label>
+                  <div className="mt-2">
+                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary-1 sm:max-w-md">
+                      <input
+                        type="text"
+                        name="university"
+                        id="university"
+                        autoComplete="university"
+                        className="pl-3 block w-full border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:leading-6"
+                        placeholder="University's name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="faculty-name"
+                    className="block font-medium leading-7 text-gray-900"
+                  >
+                    Faculty&apos;s Name
+                  </label>
+                  <div className="mt-2">
+                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary-1 sm:max-w-md">
+                      <input
+                        type="text"
+                        name="faculty"
+                        id="faculty"
+                        autoComplete="faculty"
+                        className="pl-3 w-full block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:leading-6"
+                        placeholder="Faculty's name"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                <div>
+                  <label
+                    htmlFor="university-name"
+                    className="block font-medium leading-7 mt-4 text-gray-900"
+                  >
+                    Apply As
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="role"
+                      name="role"
+                      autoComplete="role-name"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-1 sm:max-w-xs sm:leading-6"
+                      defaultValue={role}
+                      onChange={(e) => setRole(e.target.value)}
+                    >
+                      <option value="student">Student</option>
+                      <option value="instructure">Instructure</option>
+                    </select>
+                  </div>
+                </div>
+                {role === 'student' && (
+                  <div>
+                    <label
+                      htmlFor="university-name"
+                      className="block font-medium leading-7 mt-4 text-gray-900"
+                    >
+                      Current year
+                    </label>
+                    <div className="mt-2">
+                      <select
+                        id="year"
+                        name="year"
+                        autoComplete="year"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-1 sm:max-w-xs sm:leading-6"
+                      >
+                        <option value="1">Year 1</option>
+                        <option value="2">Year 2</option>
+                        <option value="3">Year 3</option>
+                        <option value="4">Year 4</option>
+                        <option value="5">Year 5</option>
+                        <option value="6">Year 6</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <label
                 htmlFor="cover-photo"
-                className="block font-medium leading-7 text-gray-900"
+                className="block font-medium leading-6 text-gray-900 mt-4"
               >
                 Upload your student / teacher identification card
               </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 {!image && (
                   <div className="text-center">
                     <PhotoIcon
@@ -75,7 +170,7 @@ const EducationVerify = (props: Props) => {
                           ref={fileRef}
                           multiple={false}
                           className="sr-only"
-                          onChange={(e) => fileChange(e)}
+                          onChange={(e) => fileChange(e.target.files)}
                         />
                       </label>
                       <p className="pl-1">or drag and drop</p>
