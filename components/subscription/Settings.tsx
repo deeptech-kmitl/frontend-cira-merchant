@@ -53,7 +53,7 @@ const Settings = (props: Props) => {
               <TabsHeader>
                 {data.map((item: TabProps) => (
                   <Tab key={item.value} value={item.value} className="py-4">
-                    <div className="flex items-center gap-2 px-4 ">
+                    <div className="flex items-center gap-2 px-4 select-none">
                       {item.icon}
                       {item.label}
                     </div>
