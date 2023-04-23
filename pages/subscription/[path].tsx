@@ -81,7 +81,7 @@ const SubscriptionMod = () => {
         </div>
       </div>
       <div
-        className={`absolute z-50 top-6 transition-all ease-linear duration-200 ${
+        className={`lg:hidden absolute z-50 top-6 transition-all ease-linear duration-200 ${
           toggleMenu ? 'right-6' : 'left-6'
         }`}
       >
