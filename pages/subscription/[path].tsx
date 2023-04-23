@@ -1,5 +1,6 @@
 import {
   DashBoard,
+  EducationVerify,
   Reports,
   Settings,
   SideBar,
@@ -50,6 +51,10 @@ const SubscriptionMod = () => {
     {
       path: 'subscription',
       component: <Subscription user={user} />,
+    },
+    {
+      path: 'education-verification',
+      component: <EducationVerify user={user} />,
     },
     {
       path: 'settings',
